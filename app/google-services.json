@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "164653335451-lrinmi50mf986qpkckcfv55at5dejpip.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.dutinfoprojet19.meetmydoc",
+            "certificate_hash": "6419f4d8df2e0a684936805fab37921c02dddf26"
+          }
+        },
+        {
           "client_id": "164653335451-3t7n0heu8lfroh7mu6pr2tnhud8u6ntk.apps.googleusercontent.com",
           "client_type": 3
         }
