@@ -46,7 +46,7 @@ public class ConnexionActivity extends AppCompatActivity {
 
             // clicks sur le bouton (gerer le click du bouton= recuperer les données)
 
-
+         // action a faire
 
     }
 
