@@ -25,7 +25,9 @@
         <activity android:name=".controller.ChoixUtilisateurInscriptionActivity" />
         <activity
             android:name=".controller.ConnexionActivity"
-            android:label="@string/title_activity_connexion"></activity>
+            android:label="@string/title_activity_connexion" />
+        <activity android:name=".controller.ProfilPatientActivity" />
+        <activity android:name=".controller.ProfilMedecinActivity"></activity>
     </application>
 
 </manifest>
