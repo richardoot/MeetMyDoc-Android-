@@ -37,7 +37,17 @@ public class ConnexionActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         // referencement des objet
-        
+
+
+        // s'enreigistrer
+        senreigistrerPatient("kgassant@iutbayonne.univ-pau.fr", "meetMYMedecin17");
+
+        // se connecter
+
+            // clicks sur le bouton (gerer le click du bouton= recuperer les données)
+
+
+
     }
 
     @Override
