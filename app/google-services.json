@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "164653335451",
+    "firebase_url": "https://meetmydoc-11221.firebaseio.com",
+    "project_id": "meetmydoc-11221",
+    "storage_bucket": "meetmydoc-11221.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164653335451:android:72786f7d9d0051e1",
+        "android_client_info": {
+          "package_name": "fr.dutinfoprojet19.meetmydoc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164653335451-s16bs40s18un23ikv6buqc28un25q89c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.dutinfoprojet19.meetmydoc",
+            "certificate_hash": "5db9587edd6386f015f4bf262f82317d6aba24c5"
+          }
+        },
+        {
+          "client_id": "164653335451-3t7n0heu8lfroh7mu6pr2tnhud8u6ntk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpQYz3bV4p5b0zIOxoupttOTZMAjXY7Wc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164653335451-3t7n0heu8lfroh7mu6pr2tnhud8u6ntk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
