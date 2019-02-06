@@ -20,19 +20,19 @@
             android:text="TextView" />
 
         <Button
-            android:id="@+id/activity_choix_utilisateur_medecin_btn"
+            android:id="@+id/activity_choix_utilisateur_connexion_medecin_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Button" />
 
         <Button
-            android:id="@+id/activity_choix_utilisateur_patient_btn"
+            android:id="@+id/activity_choix_utilisateur_connexion_patient_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Button" />
 
         <Button
-            android:id="@+id/activity_choix_utilisateur_administrateur_btn"
+            android:id="@+id/activity_choix_utilisateur_connexion_administrateur_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Button" />
