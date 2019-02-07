@@ -1,7 +1,9 @@
 package fr.dutinfoprojet19.meetmydoc.controller;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -34,8 +36,21 @@ public class ChoixUtilisateurInscriptionActivity extends AppCompatActivity {
 
         //Définir action du click pour
             //Bouton médecin
-
+                m_boutonMedecin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent inscriptionMedecinIntent = new Intent(ChoixUtilisateurInscriptionActivity.this, InscriptionMedecinActivity.class);
+                        startActivity(inscriptionMedecinIntent);
+                    }
+                });
 
             //Bouton patient
+                m_boutonPatient.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent inscriptionPatientIntent = new Intent(ChoixUtilisateurInscriptionActivity.this, InscriptionPatientActivity.class);
+                        startActivity(inscriptionPatientIntent);
+                    }
+                });
     }
 }
