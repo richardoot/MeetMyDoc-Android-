@@ -1,6 +1,6 @@
 package fr.dutinfoprojet19.meetmydoc.model;
 
-public class Patient {
+public class Medecin {
 
     // CONSTANTES
 
@@ -9,26 +9,29 @@ public class Patient {
     private String m_prenom;
     private String m_email;
     private String m_motDePasse;
-    private int m_sexe; // 0 si femme et 1 homme
-    private int m_nbRDVAnnules;
+    private String m_adresse;
+    private String m_tel;
+    private int m_nbRDVNonHonore;
 
 
 
     // Constructeur
 
-    public Patient(String nom, String prenom, String email, String motDePasse, int sexe) {
+
+    public Medecin(String nom, String prenom, String email, String motDePasse, String adresse, String tel) {
         m_nom = nom;
         m_prenom = prenom;
         m_email = email;
         m_motDePasse = motDePasse;
-        m_sexe = sexe;
+        m_adresse = adresse;
+        m_tel = tel;
 
-        // initialise le nombre de rendez-vous annulle a 0
-        m_nbRDVAnnules=0;
+        // initialise le nombre de rendez-vous non honore a 0
+        m_nbRDVNonHonore=0;
     }
 
 
-    // getters
+    // GETTERS
 
     public String getNom() {
         return m_nom;
@@ -46,16 +49,20 @@ public class Patient {
         return m_motDePasse;
     }
 
-    public int getSexe() {
-        return m_sexe;
+    public String getAdresse() {
+        return m_adresse;
     }
 
-    public int getNbRDVAnnules() {
-        return m_nbRDVAnnules;
+    public String getTel() {
+        return m_tel;
+    }
+
+    public int getNbRDVNonHonore() {
+        return m_nbRDVNonHonore;
     }
 
 
-    //setters
+    //SETTERS
 
 
     public void setNom(String nom) {
@@ -74,14 +81,15 @@ public class Patient {
         m_motDePasse = motDePasse;
     }
 
-    public void setSexe(int sexe) {
-        m_sexe = sexe;
+    public void setAdresse(String adresse) {
+        m_adresse = adresse;
     }
 
-    public void setNbRDVAnnules(int nbRDVAnnules) {
-        m_nbRDVAnnules = nbRDVAnnules;
+    public void setTel(String tel) {
+        m_tel = tel;
+    }
+
+    public void setNbRDVNonHonore(int nbRDVNonHonore) {
+        m_nbRDVNonHonore = nbRDVNonHonore;
     }
 }
-
-
-
