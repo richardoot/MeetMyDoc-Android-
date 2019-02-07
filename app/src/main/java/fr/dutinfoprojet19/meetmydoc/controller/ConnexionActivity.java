@@ -79,7 +79,7 @@ public class ConnexionActivity extends AppCompatActivity {
         //updateUI(currentUser);
     }
 
-    public void senreigistrerPatient(String email, String password)
+    public void senreigistrerPatient(String email, String password) //faute d'orthographe!!
     {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

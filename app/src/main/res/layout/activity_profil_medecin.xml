@@ -26,54 +26,19 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_txt_date_naissance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/activity_profil_medecin_date_naissance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
                     android:id="@+id/activity_profil_medecin_txt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:layout_marginLeft="20px"
+                    android:text="Email:"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/activity_profil_medecin_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/activity_profil_medecin_txt_telephone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/activity_profil_medecin_telephone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:layout_marginLeft="20px"
+                    android:text="françois.gimbert@gmail.fr" />
             </LinearLayout>
 
             <LinearLayout
@@ -86,33 +51,16 @@
                     android:id="@+id/activity_profil_medecin_txt_adresse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:layout_marginLeft="20px"
+                    android:text="Adresse:"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/activity_profil_medecin_adresse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|center_horizontal"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/activity_profil_medecin_txt_complement"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/activity_profil_medecin_complement"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:layout_marginLeft="20px"
+                    android:text="1 avenue Lucie Compagnon" />
             </LinearLayout>
 
             <LinearLayout
@@ -131,14 +79,17 @@
                         android:id="@+id/activity_profil_medecin_txt_code_postal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:layout_marginLeft="20px"
+                        android:text="Code Postal:"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/activity_profil_medecin_code_postal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
                         android:layout_weight="1"
-                        android:text="TextView" />
+                        android:text="64600" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -151,16 +102,83 @@
                         android:id="@+id/activity_profil_medecin_txt_ville"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:text="Ville:"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/activity_profil_medecin_ville"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="TextView" />
+                        android:text="Anglet" />
                 </LinearLayout>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/activity_profil_medecin_txt_telephone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:text="Tel cabinet:"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/activity_profil_medecin_telephone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:text="0547394623" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/activity_profil_medecin_txt_date_naissance"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tarifs et remboursement:"
+                    android:layout_marginLeft="20px"/>
+
+                <TextView
+                    android:id="@+id/activity_profil_medecin_date_naissance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Conventionné secteur 1"
+                    android:layout_marginLeft="20px"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/activity_profil_medecin_txt_complement"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:text="Moyen de paiement:" />
+
+                <TextView
+                    android:id="@+id/activity_profil_medecin_complement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:text="Cheques, espèces et cartes bancaires" />
             </LinearLayout>
 
             <LinearLayout
@@ -173,34 +191,17 @@
                     android:id="@+id/activity_profil_medecin_txt_notification"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:layout_marginLeft="20px"
+                    android:text="Visites à domicile?"
+                    android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/activity_profil_medecin_notification1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
-
-                    <TextView
-                        android:id="@+id/activity_profil_medecin_notification2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
-
-                    <TextView
-                        android:id="@+id/activity_profil_medecin_notification3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/activity_profil_medecin_notification1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
+                    android:layout_weight="1"
+                    android:text="OUI" />
             </LinearLayout>
 
             <LinearLayout
@@ -214,14 +215,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Button" />
+                    android:text="Modifier mes informations" />
 
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Button" />
             </LinearLayout>
         </LinearLayout>
 
