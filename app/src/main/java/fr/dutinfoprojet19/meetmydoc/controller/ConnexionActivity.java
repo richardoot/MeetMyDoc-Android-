@@ -46,7 +46,7 @@ public class ConnexionActivity extends AppCompatActivity {
 
 
         // s'enreigistrer
-        senreigistrerPatient("kgassant@iutbayonne.univ-pau.fr", "meetMYMedecin17");
+        senreigistrerPatient("kgassant@iutbayonne.univ-pau.fr", "meetMyDoc19");
 
         // se connecter
 
