@@ -56,12 +56,18 @@ public class ConnexionActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         //Vérifier si c'est un patient
 
+                        //recuperer les parametre
+                        String mailSaisie= m_email.getText().toString();
+                        String passwordSaisie=m_password.getText().toString();
+
+                        // appeler se connecter
+                        seConnecter(mailSaisie, passwordSaisie);
+
                         //Rediriger ver le profil patient voici le code :
                         /*Intent profilPatientIntent = new Intent(ChoixUtilisateurConnexionActivity.this, ProfilPatientActivity.class);
                         startActivity(profilPatientIntent);*/
                     }
                 });
-
 
     }
 
@@ -109,6 +115,10 @@ public class ConnexionActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
+
+                            //Rediriger ver le profil patient voici le code :
+                        Intent profilPatientIntent = new Intent(ConnexionActivity.this , ProfilPatientActivity.class);
+                        startActivity(profilPatientIntent);
 
                             Toast.makeText(ConnexionActivity.this, "Authentication reussi.",
                                     Toast.LENGTH_SHORT).show();
