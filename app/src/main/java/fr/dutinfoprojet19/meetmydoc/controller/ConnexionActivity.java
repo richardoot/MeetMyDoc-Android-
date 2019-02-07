@@ -1,9 +1,12 @@
 package fr.dutinfoprojet19.meetmydoc.controller;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,7 +27,7 @@ public class ConnexionActivity extends AppCompatActivity {
 
     // Varaible de referencement
 
-    private EditText m_email;
+    private AutoCompleteTextView m_email;
     private EditText m_password;
     private Button m_buttonConnecter;
 
@@ -37,6 +40,9 @@ public class ConnexionActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         // referencement des objet
+            m_email = (AutoCompleteTextView) findViewById(R.id.activity_connexion_email);
+            m_password = (EditText) findViewById(R.id.activity_connexion_password);
+            m_buttonConnecter = (Button) findViewById(R.id.activity_connexion_sign_in_button);
 
 
         // s'enreigistrer
@@ -45,8 +51,17 @@ public class ConnexionActivity extends AppCompatActivity {
         // se connecter
 
             // clicks sur le bouton (gerer le click du bouton= recuperer les données)
+                m_buttonConnecter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Vérifier si c'est un patient
 
-         // action a faire
+                        //Rediriger ver le profil patient voici le code :
+                        /*Intent profilPatientIntent = new Intent(ChoixUtilisateurConnexionActivity.this, ProfilPatientActivity.class);
+                        startActivity(profilPatientIntent);*/
+                    }
+                });
+
 
     }
 
