@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,8 +44,8 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         private EditText m_inputEmailConfirmer;
         private EditText m_inputMotDePasse;
         private EditText m_inputMotDePasseConfirmer;
-        private Button m_btnRadioFemme;
-        private Button m_btnRadioHomme;
+        private RadioButton m_btnRadioFemme;
+        private RadioButton m_btnRadioHomme;
         private Button m_btnInscription;
 
 
@@ -71,11 +72,35 @@ public class InscriptionPatientActivity extends AppCompatActivity {
             m_inputEmailConfirmer = (EditText) findViewById(R.id.activity_inscription_patient_input_confirmer_email);
             m_inputMotDePasse = (EditText) findViewById(R.id.activity_inscription_patient_input_mot_de_passe);
             m_inputMotDePasseConfirmer = (EditText) findViewById(R.id.activity_inscription_patient_input_confirmer_mot_de_passe);
-            m_btnRadioFemme = (Button) findViewById(R.id.activity_inscription_patient_btn_radio_femme);
-            m_btnRadioHomme = (Button) findViewById(R.id.activity_inscription_patient_btn_radio_homme);
+            m_btnRadioFemme = (RadioButton) findViewById(R.id.activity_inscription_patient_btn_radio_femme);
+            m_btnRadioHomme = (RadioButton) findViewById(R.id.activity_inscription_patient_btn_radio_homme);
             m_btnInscription = (Button) findViewById(R.id.activity_inscription_patient_btn_terminer);
 
 
+           // recupêrer les données saisies
+
+            String nom=m_inputNom.getText().toString();
+            String prenom=m_txtPrenom.getText().toString();
+            String email=m_inputEmail.getText().toString();
+            String emailConfirmer=m_inputEmailConfirmer.getText().toString();
+            String motDePasse=m_inputMotDePasse.getText().toString();
+            String motDePasseConfirmer=m_inputMotDePasseConfirmer.getText().toString();
+            Integer sexe;
+
+            if(m_btnRadioFemme.isChecked())
+            {
+                // c'est une femme
+                sexe = 0;
+            }
+            else
+            {
+                // c'est un homme
+                sexe=1;
+            }
+
+            // verifier les donnees saisie par le patient
+
+            verificationDonnee(email, emailConfirmer, motDePasse, motDePasseConfirmer);
 
     }
 
@@ -117,9 +142,19 @@ public class InscriptionPatientActivity extends AppCompatActivity {
 
     public void creerPatient()
     {
-        Patient()
+        Patient m_patient=new Patient(m_inputNom, m_txtPrenom, m_inputEmail, m_inputMotDePasse, m_btnRadioFemme);
+
 
     }
+
+    public boolean verificationDonnee(String email, String emailConfirmer, String motDepasse, String motDePasseConfirmer)
+    {
+
+        return ( (email==emailConfirmer) && (motDepasse==motDePasseConfirmer));
+
+    }
+
+
 
 
     public void showDatePickerDialog(View v) {
