@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import fr.dutinfoprojet19.meetmydoc.R;
+import fr.dutinfoprojet19.meetmydoc.model.Patient;
 
 public class InscriptionPatientActivity extends AppCompatActivity {
 
@@ -111,6 +112,12 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+
+    }
+
+    public void creerPatient()
+    {
+        Patient()
 
     }
 
