@@ -77,35 +77,44 @@ public class InscriptionPatientActivity extends AppCompatActivity {
             m_btnInscription = (Button) findViewById(R.id.activity_inscription_patient_btn_terminer);
 
 
-           // recupêrer les données saisies
+            // action a effectué lorsque l'on clique su le bouton
+            m_btnInscription.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-            String nom=m_inputNom.getText().toString();
-            String prenom=m_txtPrenom.getText().toString();
-            String email=m_inputEmail.getText().toString();
-            String emailConfirmer=m_inputEmailConfirmer.getText().toString();
-            String motDePasse=m_inputMotDePasse.getText().toString();
-            String motDePasseConfirmer=m_inputMotDePasseConfirmer.getText().toString();
-            Integer sexe;
+                    // recupêrer les données saisies
 
-            if(m_btnRadioFemme.isChecked())
-            {
-                // c'est une femme
-                sexe = 0;
-            }
-            else
-            {
-                // c'est un homme
-                sexe=1;
-            }
+                    String nom=m_inputNom.getText().toString();
+                    String prenom=m_txtPrenom.getText().toString();
+                    String email=m_inputEmail.getText().toString();
+                    String emailConfirmer=m_inputEmailConfirmer.getText().toString();
+                    String motDePasse=m_inputMotDePasse.getText().toString();
+                    String motDePasseConfirmer=m_inputMotDePasseConfirmer.getText().toString();
+                    Integer sexe;
 
-            // verifier les donnees saisie par le patient pour creer le compte du patient
+                    if(m_btnRadioFemme.isChecked())
+                    {
+                        // c'est une femme
+                        sexe = 0;
+                    }
+                    else
+                    {
+                        // c'est un homme
+                        sexe=1;
+                    }
 
-        if (verificationDonnee(email, emailConfirmer, motDePasse, motDePasseConfirmer))
-        {
-            // les donnnes sont valides (càd les deux mails sont pareil et les deux motDePassed sont pareil
+                    // verifier les donnees saisie par le patient pour creer le compte du patient
 
-            senreigistrerPatient(email, motDePasse);
-        }
+                    if (verificationDonnee(email, emailConfirmer, motDePasse, motDePasseConfirmer))
+                    {
+                        // les donnnes sont valides (càd les deux mails sont pareil et les deux motDePassed sont pareil
+
+                        senreigistrerPatient(email, motDePasse);
+                    }
+
+
+                }
+            });
 
     }
 
