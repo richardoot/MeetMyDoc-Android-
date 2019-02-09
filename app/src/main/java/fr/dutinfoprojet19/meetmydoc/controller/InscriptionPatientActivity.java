@@ -98,9 +98,14 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                 sexe=1;
             }
 
-            // verifier les donnees saisie par le patient
+            // verifier les donnees saisie par le patient pour creer le compte du patient
 
-            verificationDonnee(email, emailConfirmer, motDePasse, motDePasseConfirmer);
+        if (verificationDonnee(email, emailConfirmer, motDePasse, motDePasseConfirmer))
+        {
+            // les donnnes sont valides (càd les deux mails sont pareil et les deux motDePassed sont pareil
+
+            senreigistrerPatient(email, motDePasse);
+        }
 
     }
 
@@ -123,6 +128,8 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //  updateUI(user);
+
+                            //creerPatient();
                         }
                         else
                         {
@@ -132,6 +139,8 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                             Toast.makeText(InscriptionPatientActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
+
+
                         }
 
                         // ...
@@ -140,13 +149,31 @@ public class InscriptionPatientActivity extends AppCompatActivity {
 
     }
 
-    public void creerPatient()
+    /**
+     *  Sert à créer le patient avec le service de fireStore( en base de donnée)
+     *  et au services d'authentification lors de son incription
+     * @param nom - le nom du patient
+     * @param prenom -le prenom du patient
+     * @param email - l'email du patient
+     * @param motDePasse - le mot de passe du patient
+     * @param sexe - égale 0 si c'est un femme et 1 si c'est un homme
+     */
+    public void creerPatient(String nom, String prenom, String email, String motDePasse, Integer sexe)
     {
-        Patient m_patient=new Patient(m_inputNom, m_txtPrenom, m_inputEmail, m_inputMotDePasse, m_btnRadioFemme);
+        Patient m_patient=new Patient(nom, prenom, email, motDePasse, sexe);
 
+        // enreigister le patient en BD
 
     }
 
+    /**
+     * Permet de vérifier les donnees saisie par le parient (mail et mot de passe)
+     * @param email
+     * @param emailConfirmer
+     * @param motDepasse
+     * @param motDePasseConfirmer
+     * @return - true si les données sont correct et false si inverse
+     */
     public boolean verificationDonnee(String email, String emailConfirmer, String motDepasse, String motDePasseConfirmer)
     {
 
