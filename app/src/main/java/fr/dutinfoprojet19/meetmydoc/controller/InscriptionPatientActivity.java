@@ -186,7 +186,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
     public boolean verificationDonnee(String email, String emailConfirmer, String motDepasse, String motDePasseConfirmer)
     {
 
-        return ( (email==emailConfirmer) && (motDepasse==motDePasseConfirmer));
+        return ( (email.equals(emailConfirmer)) && (motDepasse.equals(motDePasseConfirmer)));
 
     }
 
