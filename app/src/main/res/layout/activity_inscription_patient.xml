@@ -145,19 +145,18 @@
                     android:text="Mot de passe:" />
 
 
-
                 <EditText
                     android:id="@+id/activity_inscription_patient_input_mot_de_passe"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:imeActionId="6"
-                    android:hint="Password"
-                    android:imeOptions="actionUnspecified"
-                    android:maxLines="1"
-                    android:singleLine="true"
                     android:ems="10"
-                    android:inputType="textPersonName"/>
+                    android:hint="Password"
+                    android:imeActionId="6"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
                 <TextView
                     android:id="@+id/activity_inscription_patient_txt_confirmer_mot_de_passe"
@@ -170,13 +169,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:imeActionId="6"
-                    android:hint="Password"
-                    android:imeOptions="actionUnspecified"
-                    android:maxLines="1"
-                    android:singleLine="true"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:hint="Password"
+                    android:imeActionId="6"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
             </LinearLayout>
 
             <LinearLayout
