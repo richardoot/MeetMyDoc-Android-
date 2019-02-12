@@ -1,5 +1,6 @@
 package fr.dutinfoprojet19.meetmydoc.controller;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -23,11 +24,15 @@ import fr.dutinfoprojet19.meetmydoc.model.Patient;
 
 public class InscriptionPatientActivity extends AppCompatActivity {
 
+
     // Constante
         private static final String TAG ="InscriptionPatient" ;
 
     // Objet d'authentification
-        private FirebaseAuth mAuth;
+        private FirebaseAuth m_Auth;
+
+    // Objet Base de données
+        //private FirebaseFirestore m_db = FirebaseFirestore.getInstance();
 
     // Déclaration des éléments graphiques
         private TextView m_txtNom;
@@ -53,68 +58,69 @@ public class InscriptionPatientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription_patient);
-
-        // initialisation de l'instance FirebaseAuth
-            mAuth = FirebaseAuth.getInstance();
+// initialisation de l'instance FirebaseAuth
+        m_Auth = FirebaseAuth.getInstance();
 
         // Référencement graphique
-            m_txtNom = (TextView) findViewById(R.id.activity_inscription_patient_txt_nom);
-            m_txtPrenom = (TextView) findViewById(R.id.activity_inscription_patient_txt_prenom);
-            m_txtEmail = (TextView) findViewById(R.id.activity_inscription_patient_txt_email);
-            m_txtEmailConfirmer = (TextView) findViewById(R.id.activity_inscription_patient_txt_confirmer_email);
-            m_txtMotDePasse = (TextView) findViewById(R.id.activity_inscription_patient_txt_mot_de_passe);
-            m_txtMotDePasseConfirmer = (TextView) findViewById(R.id.activity_inscription_patient_txt_confirmer_mot_de_passe);
-            m_txtEnonce = (TextView) findViewById(R.id.activity_inscription_patient_enonce);
-            m_txtSexe = (TextView) findViewById(R.id.activity_inscription_patient_txt_sexe);
-            m_inputNom = (EditText) findViewById(R.id.activity_inscription_patient_input_nom);
-            m_inputPrenom = (EditText) findViewById(R.id.activity_inscription_patient_input_prenom);
-            m_inputEmail = (EditText) findViewById(R.id.activity_inscription_patient_input_email);
-            m_inputEmailConfirmer = (EditText) findViewById(R.id.activity_inscription_patient_input_confirmer_email);
-            m_inputMotDePasse = (EditText) findViewById(R.id.activity_inscription_patient_input_mot_de_passe);
-            m_inputMotDePasseConfirmer = (EditText) findViewById(R.id.activity_inscription_patient_input_confirmer_mot_de_passe);
-            m_btnRadioFemme = (RadioButton) findViewById(R.id.activity_inscription_patient_btn_radio_femme);
-            m_btnRadioHomme = (RadioButton) findViewById(R.id.activity_inscription_patient_btn_radio_homme);
-            m_btnInscription = (Button) findViewById(R.id.activity_inscription_patient_btn_terminer);
+        m_txtNom = (TextView) findViewById(R.id.activity_inscription_patient_txt_nom);
+        m_txtPrenom = (TextView) findViewById(R.id.activity_inscription_patient_txt_prenom);
+        m_txtEmail = (TextView) findViewById(R.id.activity_inscription_patient_txt_email);
+        m_txtEmailConfirmer = (TextView) findViewById(R.id.activity_inscription_patient_txt_confirmer_email);
+        m_txtMotDePasse = (TextView) findViewById(R.id.activity_inscription_patient_txt_mot_de_passe);
+        m_txtMotDePasseConfirmer = (TextView) findViewById(R.id.activity_inscription_patient_txt_confirmer_mot_de_passe);
+        m_txtEnonce = (TextView) findViewById(R.id.activity_inscription_patient_enonce);
+        m_txtSexe = (TextView) findViewById(R.id.activity_inscription_patient_txt_sexe);
+        m_inputNom = (EditText) findViewById(R.id.activity_inscription_patient_input_nom);
+        m_inputPrenom = (EditText) findViewById(R.id.activity_inscription_patient_input_prenom);
+        m_inputEmail = (EditText) findViewById(R.id.activity_inscription_patient_input_email);
+        m_inputEmailConfirmer = (EditText) findViewById(R.id.activity_inscription_patient_input_confirmer_email);
+        m_inputMotDePasse = (EditText) findViewById(R.id.activity_inscription_patient_input_mot_de_passe);
+        m_inputMotDePasseConfirmer = (EditText) findViewById(R.id.activity_inscription_patient_input_confirmer_mot_de_passe);
+        m_btnRadioFemme = (RadioButton) findViewById(R.id.activity_inscription_patient_btn_radio_femme);
+        m_btnRadioHomme = (RadioButton) findViewById(R.id.activity_inscription_patient_btn_radio_homme);
+        m_btnInscription = (Button) findViewById(R.id.activity_inscription_patient_btn_terminer);
 
 
-            // action a effectué lorsque l'on clique su le bouton
-            m_btnInscription.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    // recupêrer les données saisies
+        //Lorsqu'on click sur terminer inscription
+        m_btnInscription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Récupérer email et mdp
+                String saisieEmail = m_inputEmail.getText().toString();
+                String saisieEmailConfirmer = m_inputEmailConfirmer.getText().toString();
+                String saisiePassword = m_inputMotDePasse.getText().toString();
+                String saisiePasswordConfirmer = m_inputMotDePasseConfirmer.getText().toString();
 
-                    String nom=m_inputNom.getText().toString();
-                    String prenom=m_txtPrenom.getText().toString();
-                    String email=m_inputEmail.getText().toString();
-                    String emailConfirmer=m_inputEmailConfirmer.getText().toString();
-                    String motDePasse=m_inputMotDePasse.getText().toString();
-                    String motDePasseConfirmer=m_inputMotDePasseConfirmer.getText().toString();
-                    Integer sexe;
+                //Récupérer les autres informations
+                String saisieNom = m_inputNom.getText().toString();
+                String saisiePrenom = m_inputPrenom.getText().toString();
 
-                    if(m_btnRadioFemme.isChecked())
-                    {
-                        // c'est une femme
-                        sexe = 0;
+                // Effectuer l'inscription
+                //Vérifier la cohérence de tous les éléments
+                if(!saisieNom.matches("") &&  !saisiePrenom.matches("") && (m_btnRadioFemme.isChecked() || m_btnRadioHomme.isChecked())
+                        && (!saisieEmail.matches("") || !saisieEmailConfirmer.matches("")) && (!saisiePassword.matches("") || !saisiePassword.matches(""))) {
+
+                    if (saisieEmail.equals(saisieEmailConfirmer)) {
+                        if (saisiePassword.equals(saisiePasswordConfirmer)) {
+                            //Ajout des éléments en base de données
+
+
+                            //Réaliser l'inscription du patient
+                                sInscrire(saisieEmail, saisiePassword);
+                        } else {
+                            Toast.makeText(InscriptionPatientActivity.this, "Les 2 mots de passe ne sont pas identiques", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(InscriptionPatientActivity.this, "Les 2 emails ne sont pas identiques", Toast.LENGTH_SHORT).show();
                     }
-                    else
-                    {
-                        // c'est un homme
-                        sexe=1;
-                    }
-
-                    // verifier les donnees saisie par le patient pour creer le compte du patient
-
-                    if (verificationDonnee(email, emailConfirmer, motDePasse, motDePasseConfirmer))
-                    {
-                        // les donnnes sont valides (càd les deux mails sont pareil et les deux motDePassed sont pareil
-
-                        senreigistrerPatient(email, motDePasse);
-                    }
-
-
                 }
-            });
+                else{
+                    Toast.makeText(InscriptionPatientActivity.this, "Il y a des informations manquantes", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
     }
 
@@ -122,39 +128,35 @@ public class InscriptionPatientActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser currentUser = m_Auth.getCurrentUser();
         //updateUI(currentUser);
     }
 
-    public void senreigistrerPatient(String email, String password) //faute d'orthographe!!
-    {
-        mAuth.createUserWithEmailAndPassword(email, password)
+    public void sInscrire(String email, String password) {
+
+        m_Auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //  updateUI(user);
+                            FirebaseUser user = m_Auth.getCurrentUser();
 
-                            //creerPatient();
-                        }
-                        else
-                        {
+                            //Rediriger vers la page de connexion
+                            Intent connexionIntent = new Intent(InscriptionPatientActivity.this, ConnexionActivity.class);
+                            startActivity(connexionIntent);
 
+                        } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(InscriptionPatientActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
-
-
                         }
 
-                        // ...
                     }
-                });
+        });
 
     }
 
