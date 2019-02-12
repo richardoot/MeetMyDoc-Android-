@@ -220,22 +220,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <NumberPicker
+                <TextView
+                    android:id="@+id/activity_inscription_patient_txt_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="15dp"
+                    android:text="Date de naissance:" />
+
+                <EditText
+                    android:id="@+id/activity_inscription_patient_input_date"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:hint="JJ/MM/AAAA" />
 
-                <NumberPicker
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
-
-                <NumberPicker
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
 
             </LinearLayout>
 

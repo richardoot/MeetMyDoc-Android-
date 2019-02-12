@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import fr.dutinfoprojet19.meetmydoc.R;
@@ -25,9 +26,9 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
         private EditText m_inputEmailConfirmer;
         private EditText m_inputMotDePasse;
         private EditText m_inputMotDePasseConfirmer;
-        private Button m_btnRadioFemme;
-        private Button m_btnRadioHomme;
-        private Button m_btnDate;
+        private EditText m_inputDate;
+        private RadioButton m_btnRadioFemme;
+        private RadioButton m_btnRadioHomme;
         private Button m_btnInscription;
 
     @Override
@@ -50,10 +51,10 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
             m_inputEmailConfirmer = (EditText) findViewById(R.id.activity_inscription_medecin_input_confirmer_email);
             m_inputMotDePasse = (EditText) findViewById(R.id.activity_inscription_medecin_input_mot_de_passe);
             m_inputMotDePasseConfirmer = (EditText) findViewById(R.id.activity_inscription_medecin_input_confirmer_mot_de_passe);
-            m_btnRadioFemme = (Button) findViewById(R.id.activity_inscription_medecin_btn_radio_femme);
-            m_btnRadioHomme = (Button) findViewById(R.id.activity_inscription_medecin_btn_radio_homme);
-            m_btnDate = (Button) findViewById(R.id.activity_inscription_medecin_date_btn);
+            m_btnRadioFemme = (RadioButton) findViewById(R.id.activity_inscription_medecin_btn_radio_femme);
+            m_btnRadioHomme = (RadioButton) findViewById(R.id.activity_inscription_medecin_btn_radio_homme);
+            m_inputDate = (EditText) findViewById(R.id.activity_inscription_medecin_input_date);
             m_btnInscription = (Button) findViewById(R.id.activity_inscription_medecin_btn_terminer);
-
     }
+
 }
