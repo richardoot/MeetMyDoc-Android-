@@ -215,18 +215,31 @@
 
             </LinearLayout>
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/activity_inscription_medecin_date_btn"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/activity_inscription_medecin_txt_date"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Choisir Date"
-                    android:onClick="showTimePickerDialog" />
+                    android:paddingBottom="5dp"
+                    android:paddingTop="15dp"
+                    android:text="Date de naissance:" />
 
-            </FrameLayout>
+                <EditText
+                    android:id="@+id/activity_inscription_medecin_input_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:hint="JJ/MM/AAAA" />
+
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/activity_inscription_medecin_btn_terminer"
