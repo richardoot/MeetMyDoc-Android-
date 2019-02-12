@@ -8,7 +8,6 @@ public class Medecin {
     private String m_nom;
     private String m_prenom;
     private String m_email;
-    private String m_motDePasse;
     private String m_adresse;
     private String m_tel;
     private int m_nbRDVNonHonore;
@@ -18,11 +17,10 @@ public class Medecin {
     // Constructeur
 
 
-    public Medecin(String nom, String prenom, String email, String motDePasse, String adresse, String tel) {
+    public Medecin(String nom, String prenom, String email, String adresse, String tel) {
         m_nom = nom;
         m_prenom = prenom;
         m_email = email;
-        m_motDePasse = motDePasse;
         m_adresse = adresse;
         m_tel = tel;
 
@@ -43,10 +41,6 @@ public class Medecin {
 
     public String getEmail() {
         return m_email;
-    }
-
-    public String getMotDePasse() {
-        return m_motDePasse;
     }
 
     public String getAdresse() {
@@ -75,10 +69,6 @@ public class Medecin {
 
     public void setEmail(String email) {
         m_email = email;
-    }
-
-    public void setMotDePasse(String motDePasse) {
-        m_motDePasse = motDePasse;
     }
 
     public void setAdresse(String adresse) {
