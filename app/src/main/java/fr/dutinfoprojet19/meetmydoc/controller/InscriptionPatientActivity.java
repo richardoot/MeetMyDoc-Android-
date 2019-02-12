@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import fr.dutinfoprojet19.meetmydoc.R;
+import fr.dutinfoprojet19.meetmydoc.model.Patient;
 
 public class InscriptionPatientActivity extends AppCompatActivity {
 
@@ -42,8 +44,8 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         private EditText m_inputEmailConfirmer;
         private EditText m_inputMotDePasse;
         private EditText m_inputMotDePasseConfirmer;
-        private Button m_btnRadioFemme;
-        private Button m_btnRadioHomme;
+        private RadioButton m_btnRadioFemme;
+        private RadioButton m_btnRadioHomme;
         private Button m_btnInscription;
 
 
@@ -70,11 +72,49 @@ public class InscriptionPatientActivity extends AppCompatActivity {
             m_inputEmailConfirmer = (EditText) findViewById(R.id.activity_inscription_patient_input_confirmer_email);
             m_inputMotDePasse = (EditText) findViewById(R.id.activity_inscription_patient_input_mot_de_passe);
             m_inputMotDePasseConfirmer = (EditText) findViewById(R.id.activity_inscription_patient_input_confirmer_mot_de_passe);
-            m_btnRadioFemme = (Button) findViewById(R.id.activity_inscription_patient_btn_radio_femme);
-            m_btnRadioHomme = (Button) findViewById(R.id.activity_inscription_patient_btn_radio_homme);
+            m_btnRadioFemme = (RadioButton) findViewById(R.id.activity_inscription_patient_btn_radio_femme);
+            m_btnRadioHomme = (RadioButton) findViewById(R.id.activity_inscription_patient_btn_radio_homme);
             m_btnInscription = (Button) findViewById(R.id.activity_inscription_patient_btn_terminer);
 
 
+            // action a effectué lorsque l'on clique su le bouton
+            m_btnInscription.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    // recupêrer les données saisies
+
+                    String nom=m_inputNom.getText().toString();
+                    String prenom=m_txtPrenom.getText().toString();
+                    String email=m_inputEmail.getText().toString();
+                    String emailConfirmer=m_inputEmailConfirmer.getText().toString();
+                    String motDePasse=m_inputMotDePasse.getText().toString();
+                    String motDePasseConfirmer=m_inputMotDePasseConfirmer.getText().toString();
+                    Integer sexe;
+
+                    if(m_btnRadioFemme.isChecked())
+                    {
+                        // c'est une femme
+                        sexe = 0;
+                    }
+                    else
+                    {
+                        // c'est un homme
+                        sexe=1;
+                    }
+
+                    // verifier les donnees saisie par le patient pour creer le compte du patient
+
+                    if (verificationDonnee(email, emailConfirmer, motDePasse, motDePasseConfirmer))
+                    {
+                        // les donnnes sont valides (càd les deux mails sont pareil et les deux motDePassed sont pareil
+
+                        senreigistrerPatient(email, motDePasse);
+                    }
+
+
+                }
+            });
 
     }
 
@@ -97,6 +137,8 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //  updateUI(user);
+
+                            //creerPatient();
                         }
                         else
                         {
@@ -106,6 +148,8 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                             Toast.makeText(InscriptionPatientActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
+
+
                         }
 
                         // ...
@@ -113,6 +157,40 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                 });
 
     }
+
+    /**
+     *  Sert à créer le patient avec le service de fireStore( en base de donnée)
+     *  et au services d'authentification lors de son incription
+     * @param nom - le nom du patient
+     * @param prenom -le prenom du patient
+     * @param email - l'email du patient
+     * @param motDePasse - le mot de passe du patient
+     * @param sexe - égale 0 si c'est un femme et 1 si c'est un homme
+     */
+    public void creerPatient(String nom, String prenom, String email, String motDePasse, Integer sexe)
+    {
+        Patient m_patient=new Patient(nom, prenom, email, motDePasse, sexe);
+
+        // enreigister le patient en BD
+
+    }
+
+    /**
+     * Permet de vérifier les donnees saisie par le parient (mail et mot de passe)
+     * @param email
+     * @param emailConfirmer
+     * @param motDepasse
+     * @param motDePasseConfirmer
+     * @return - true si les données sont correct et false si inverse
+     */
+    public boolean verificationDonnee(String email, String emailConfirmer, String motDepasse, String motDePasseConfirmer)
+    {
+
+        return ( (email.equals(emailConfirmer)) && (motDepasse.equals(motDePasseConfirmer)));
+
+    }
+
+
 
 
     public void showDatePickerDialog(View v) {
