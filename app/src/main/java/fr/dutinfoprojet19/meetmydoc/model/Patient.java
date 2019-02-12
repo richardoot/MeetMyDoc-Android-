@@ -8,7 +8,6 @@ public class Patient {
     private String m_nom;
     private String m_prenom;
     private String m_email;
-    private String m_motDePasse;
     private int m_sexe; // 0 si femme et 1 homme
     private int m_nbRDVAnnules;
 
@@ -16,11 +15,10 @@ public class Patient {
 
     // Constructeur
 
-    public Patient(String nom, String prenom, String email, String motDePasse, int sexe) {
+    public Patient(String nom, String prenom, String email, int sexe) {
         m_nom = nom;
         m_prenom = prenom;
         m_email = email;
-        m_motDePasse = motDePasse;
         m_sexe = sexe;
 
         // initialise le nombre de rendez-vous annulle a 0
@@ -40,10 +38,6 @@ public class Patient {
 
     public String getEmail() {
         return m_email;
-    }
-
-    public String getMotDePasse() {
-        return m_motDePasse;
     }
 
     public int getSexe() {
@@ -68,10 +62,6 @@ public class Patient {
 
     public void setEmail(String email) {
         m_email = email;
-    }
-
-    public void setMotDePasse(String motDePasse) {
-        m_motDePasse = motDePasse;
     }
 
     public void setSexe(int sexe) {

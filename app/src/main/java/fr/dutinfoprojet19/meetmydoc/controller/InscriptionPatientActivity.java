@@ -166,14 +166,15 @@ public class InscriptionPatientActivity extends AppCompatActivity {
      * @param nom - le nom du patient
      * @param prenom -le prenom du patient
      * @param email - l'email du patient
-     * @param motDePasse - le mot de passe du patient
      * @param sexe - égale 0 si c'est un femme et 1 si c'est un homme
      */
-    public void creerPatient(String nom, String prenom, String email, String motDePasse, Integer sexe)
+    public void creerPatient(String nom, String prenom, String email, Integer sexe)
     {
-        Patient m_patient=new Patient(nom, prenom, email, motDePasse, sexe);
+        Patient m_patient=new Patient(nom, prenom, email, sexe);
 
         // enreigister le patient en BD
+
+
 
     }
 
