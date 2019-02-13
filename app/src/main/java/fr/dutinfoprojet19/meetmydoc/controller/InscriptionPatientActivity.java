@@ -13,10 +13,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import fr.dutinfoprojet19.meetmydoc.R;
 import fr.dutinfoprojet19.meetmydoc.model.Patient;
@@ -28,6 +35,8 @@ public class InscriptionPatientActivity extends AppCompatActivity {
 
     // Objet d'authentification
         private FirebaseAuth mAuth;
+    // Objet pour géerer la BD ( firestore)
+    FirebaseFirestore db;
 
     // Déclaration des éléments graphiques
         private TextView m_txtNom;
@@ -57,6 +66,10 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         // initialisation de l'instance FirebaseAuth
             mAuth = FirebaseAuth.getInstance();
 
+        // initialialisation de l'instance FirebaseFirestore
+
+           db = FirebaseFirestore.getInstance();
+
         // Référencement graphique
             m_txtNom = (TextView) findViewById(R.id.activity_inscription_patient_txt_nom);
             m_txtPrenom = (TextView) findViewById(R.id.activity_inscription_patient_txt_prenom);
@@ -84,13 +97,13 @@ public class InscriptionPatientActivity extends AppCompatActivity {
 
                     // recupêrer les données saisies
 
-                    String nom=m_inputNom.getText().toString();
-                    String prenom=m_txtPrenom.getText().toString();
-                    String email=m_inputEmail.getText().toString();
-                    String emailConfirmer=m_inputEmailConfirmer.getText().toString();
-                    String motDePasse=m_inputMotDePasse.getText().toString();
-                    String motDePasseConfirmer=m_inputMotDePasseConfirmer.getText().toString();
-                    Integer sexe;
+                    final String nom=m_inputNom.getText().toString();
+                    final String prenom=m_txtPrenom.getText().toString();
+                    final String email=m_inputEmail.getText().toString();
+                    final String emailConfirmer=m_inputEmailConfirmer.getText().toString();
+                    final String motDePasse=m_inputMotDePasse.getText().toString();
+                    final String motDePasseConfirmer=m_inputMotDePasseConfirmer.getText().toString();
+                    int sexe;
 
                     if(m_btnRadioFemme.isChecked())
                     {
@@ -120,7 +133,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                     {
                         // les donnnes sont valides (càd les deux mails sont pareil et les deux motDePassed sont pareil
 
-                        senreigistrerPatient(email, motDePasse);
+                        senreigistrerPatient(email, motDePasse, nom, prenom, sexe);
                     }
 
 
@@ -137,8 +150,9 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         //updateUI(currentUser);
     }
 
-    public void senreigistrerPatient(String email, String password) //faute d'orthographe!!
+    public void senreigistrerPatient(String email, String password, String nom, String prenom, int sexe) //faute d'orthographe!!
     {
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -149,7 +163,8 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             //  updateUI(user);
 
-                            //creerPatient();
+                            //creerPatient(c_nom, c_prenom, c_email, c_sexe);
+                            creerPatient(nom, prenom, email, sexe);
                         }
                         else
                         {
@@ -177,12 +192,31 @@ public class InscriptionPatientActivity extends AppCompatActivity {
      * @param email - l'email du patient
      * @param sexe - égale 0 si c'est un femme et 1 si c'est un homme
      */
-    public void creerPatient(String nom, String prenom, String email, Integer sexe)
+    public void creerPatient(String nom, String prenom, String email, int sexe)
     {
         Patient m_patient=new Patient(nom, prenom, email, sexe);
 
         // enreigister le patient en BD
 
+        // Create a new user with a first and last name
+        Map<String, Patient> user = new HashMap<>();
+        user.put("first", m_patient);
+
+
+        db.collection("Patient")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
 
 
     }
