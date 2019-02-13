@@ -103,9 +103,20 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                         sexe=1;
                     }
 
+
+                    if(!verificationEmail(email, emailConfirmer))
+                    {
+                        Toast.makeText(InscriptionPatientActivity.this, "Les mails ne sont pas identiques ", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if(!verificationEmail(email, emailConfirmer))
+                    {
+                        Toast.makeText(InscriptionPatientActivity.this, "Les mots de passe ne sont pas identique ", Toast.LENGTH_SHORT).show();
+                    }
+
                     // verifier les donnees saisie par le patient pour creer le compte du patient
 
-                    if (verificationDonnee(email, emailConfirmer, motDePasse, motDePasseConfirmer))
+                    if (verificationEmail(email, emailConfirmer) &&verificationMotDePasse(motDePasse, motDePasseConfirmer))
                     {
                         // les donnnes sont valides (càd les deux mails sont pareil et les deux motDePassed sont pareil
 
@@ -180,15 +191,22 @@ public class InscriptionPatientActivity extends AppCompatActivity {
      * Permet de vérifier les donnees saisie par le parient (mail et mot de passe)
      * @param email
      * @param emailConfirmer
-     * @param motDepasse
-     * @param motDePasseConfirmer
      * @return - true si les données sont correct et false si inverse
      */
-    public boolean verificationDonnee(String email, String emailConfirmer, String motDepasse, String motDePasseConfirmer)
+    public boolean verificationEmail(String email, String emailConfirmer)
     {
+        return  (email.equals(emailConfirmer)) ;
+    }
 
-        return ( (email.equals(emailConfirmer)) && (motDepasse.equals(motDePasseConfirmer)));
-
+    /**
+     *
+     * @param motDepasse
+     * @param motDePasseConfirmer
+     * @return
+     */
+    public boolean verificationMotDePasse(String motDepasse, String motDePasseConfirmer)
+    {
+        return ((motDepasse.equals(motDePasseConfirmer)) );
     }
 
 
