@@ -1,5 +1,6 @@
 package fr.dutinfoprojet19.meetmydoc.controller;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -145,6 +146,9 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                             creerPatient(nom, prenom, email, sexe);
 
                             // on redirige le patient vers la page d'acceuil | vers son profil pour la premiere version
+
+                            Intent profilPatientIntent = new Intent(InscriptionPatientActivity.this, ProfilPatientActivity.class);
+                            startActivity(profilPatientIntent);
                         }
 
                     }

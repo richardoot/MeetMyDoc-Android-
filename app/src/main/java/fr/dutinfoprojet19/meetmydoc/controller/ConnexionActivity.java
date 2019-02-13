@@ -45,8 +45,6 @@ public class ConnexionActivity extends AppCompatActivity {
             m_buttonConnecter = (Button) findViewById(R.id.activity_connexion_sign_in_button);
 
 
-        // s'enreigistrer
-        senreigistrerPatient("kgassant@iutbayonne.univ-pau.fr", "meetMYMedecin17");
 
         // se connecter
 
