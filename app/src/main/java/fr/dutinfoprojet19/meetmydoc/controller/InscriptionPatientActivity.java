@@ -103,7 +103,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                     // recupêrer les données saisies
 
                     final String nom=m_inputNom.getText().toString();
-                    final String prenom=m_txtPrenom.getText().toString();
+                    final String prenom=m_inputPrenom.getText().toString();
                     final String email=m_inputEmail.getText().toString();
                     final String emailConfirmer=m_inputEmailConfirmer.getText().toString();
                     final String motDePasse=m_inputMotDePasse.getText().toString();

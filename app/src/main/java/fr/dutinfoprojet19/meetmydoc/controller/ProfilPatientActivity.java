@@ -23,7 +23,7 @@ public class ProfilPatientActivity extends AppCompatActivity {
     private TextView m_txtTelephone;
     private TextView m_txtAdresse;
     private TextView m_txtComplement;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
