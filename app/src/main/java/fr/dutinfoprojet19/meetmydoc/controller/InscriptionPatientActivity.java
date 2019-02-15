@@ -90,7 +90,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                     String emailConfirmer=m_inputEmailConfirmer.getText().toString();
                     String motDePasse=m_inputMotDePasse.getText().toString();
                     String motDePasseConfirmer=m_inputMotDePasseConfirmer.getText().toString();
-                    Integer sexe;
+                    int sexe;
 
                     if(m_btnRadioFemme.isChecked())
                     {
@@ -166,7 +166,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
      * @param email - l'email du patient
      * @param sexe - égale 0 si c'est un femme et 1 si c'est un homme
      */
-    public void creerPatient(String nom, String prenom, String email, Integer sexe)
+    public void creerPatient(String nom, String prenom, String email, int sexe)
     {
         Patient m_patient=new Patient(nom, prenom, email, sexe);
 
