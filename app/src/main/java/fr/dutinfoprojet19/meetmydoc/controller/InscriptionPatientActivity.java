@@ -63,6 +63,8 @@ public class InscriptionPatientActivity extends AppCompatActivity {
      */
     private Boolean reussiteInscription;
 
+    // pour richard
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
