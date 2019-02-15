@@ -73,11 +73,11 @@
                     android:layout_marginLeft="20px"/>
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_email"
+                    android:id="@+id/activity_profil_patient_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="kgassant@iutbayonne.univ-pau.fr"
-                    android:layout_marginLeft="20px"/>
+                    android:layout_marginLeft="20px"
+                    android:text="kgassant@iutbayonne.univ-pau.fr" />
             </LinearLayout>
 
             <LinearLayout
@@ -87,19 +87,19 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_txt_telephone"
-                    android:textStyle="bold"
+                    android:id="@+id/activity_profil_patient_txt_telephone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20px"
                     android:text="Telephone:"
-                    android:layout_marginLeft="20px"/>
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_telephone"
+                    android:id="@+id/activity_profil_patient_telephone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="0649355937"
-                    android:layout_marginLeft="20px"/>
+                    android:layout_marginLeft="20px"
+                    android:text="0649355937" />
             </LinearLayout>
 
             <LinearLayout
@@ -117,11 +117,11 @@
                     android:layout_marginLeft="20px"/>
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_adresse"
+                    android:id="@+id/activity_profil_patient_adresse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="1 avenue Françoic Mauriac"
-                    android:layout_marginLeft="20px"/>
+                    android:layout_marginLeft="20px"
+                    android:text="1 avenue Françoic Mauriac" />
             </LinearLayout>
 
             <LinearLayout
@@ -139,7 +139,7 @@
                     android:text="Complément d'adresse:" />
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_complement"
+                    android:id="@+id/activity_profil_patient_complement"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
@@ -167,12 +167,12 @@
                         android:layout_marginLeft="20px"/>
 
                     <TextView
-                        android:id="@+id/activity_profil_medecin_code_postal"
+                        android:id="@+id/activity_profil_patient_code_postal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="20px"
                         android:layout_weight="1"
-                        android:text="64100"
-                        android:layout_marginLeft="20px"/>
+                        android:text="64100" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -189,7 +189,7 @@
                         android:text="Ville:" />
 
                     <TextView
-                        android:id="@+id/activity_profil_medecin_ville"
+                        android:id="@+id/activity_profil_patient_ville"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
