@@ -58,6 +58,8 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         private Button m_btnInscription;
 
 
+    // pour richard
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
