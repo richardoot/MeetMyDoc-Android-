@@ -58,12 +58,15 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         private RadioButton m_btnRadioHomme;
         private Button m_btnInscription;
 
+        // pour richard 2
+
     /**
      * Booléen  qui indique si la patient a reussi a s'inscrire
      */
     private Boolean reussiteInscription;
 
     // pour richard
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
