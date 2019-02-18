@@ -1,5 +1,6 @@
 package fr.dutinfoprojet19.meetmydoc.controller;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -57,8 +58,15 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         private RadioButton m_btnRadioHomme;
         private Button m_btnInscription;
 
+        // pour richard 2
+
+    /**
+     * Booléen  qui indique si la patient a reussi a s'inscrire
+     */
+    private Boolean reussiteInscription;
 
     // pour richard
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +108,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                     // recupêrer les données saisies
 
                     final String nom=m_inputNom.getText().toString();
-                    final String prenom=m_txtPrenom.getText().toString();
+                    final String prenom=m_inputPrenom.getText().toString();
                     final String email=m_inputEmail.getText().toString();
                     final String emailConfirmer=m_inputEmailConfirmer.getText().toString();
                     final String motDePasse=m_inputMotDePasse.getText().toString();
@@ -135,7 +143,19 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                     {
                         // les donnnes sont valides (càd les deux mails sont pareil et les deux motDePassed sont pareil
 
-                        senreigistrerPatient(email, motDePasse, nom, prenom, sexe);
+                        senreigistrerPatient(email, motDePasse);
+
+                        if(reussiteInscription)
+                        {
+                            // L'inscription s'est bien derouler donc on crée le patient en base de donnée
+                            creerPatient(nom, prenom, email, sexe);
+
+                            // on redirige le patient vers la page d'acceuil | vers son profil pour la premiere version
+
+                            Intent profilPatientIntent = new Intent(InscriptionPatientActivity.this, ProfilPatientActivity.class);
+                            startActivity(profilPatientIntent);
+                        }
+
                     }
 
 
@@ -152,9 +172,8 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         //updateUI(currentUser);
     }
 
-    public void senreigistrerPatient(String email, String password, String nom, String prenom, int sexe) //faute d'orthographe!!
+    public void senreigistrerPatient(String email, String password) //faute d'orthographe!!
     {
-
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -163,10 +182,10 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //  updateUI(user);
+                            // updateUI(user);
 
-                            //creerPatient(c_nom, c_prenom, c_email, c_sexe);
-                            creerPatient(nom, prenom, email, sexe);
+                            // mettre a jour le statuts de l'insription
+                            reussiteInscription=true;
                         }
                         else
                         {
@@ -177,6 +196,8 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             //updateUI(null);
 
+                            // mettre a jour le statuts de l'insription
+                            reussiteInscription=false;
 
                         }
 
@@ -244,6 +265,8 @@ public class InscriptionPatientActivity extends AppCompatActivity {
     {
         return ((motDepasse.equals(motDePasseConfirmer)) );
     }
+
+
 
 
 
