@@ -52,18 +52,37 @@ public class ConnexionActivity extends AppCompatActivity {
                 m_buttonConnecter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Vérifier si c'est un patient
 
                         //recuperer les parametre
                         String mailSaisie= m_email.getText().toString();
                         String passwordSaisie=m_password.getText().toString();
 
-                        // appeler se connecter
-                        seConnecter(mailSaisie, passwordSaisie);
+                        //Vérifier si c'est un patient ou un medecin selon le bouton appuyer avant
 
-                        //Rediriger ver le profil patient voici le code :
-                        /*Intent profilPatientIntent = new Intent(ChoixUtilisateurConnexionActivity.this, ProfilPatientActivity.class);
-                        startActivity(profilPatientIntent);*/
+                        /*
+                        if()
+                        {
+                            //patient
+
+                            // appeler se connecter
+                            seConnecterPatient(mailSaisie, passwordSaisie);
+
+
+                        }
+                        else
+                        {
+                            // c'est un patient
+
+                            // appler se connecter medecin
+                            seConnecterMedecin(mailSaisie, passwordSaisie);
+                        }
+
+                        */
+
+
+
+
+
                     }
                 });
 
@@ -77,32 +96,8 @@ public class ConnexionActivity extends AppCompatActivity {
         //updateUI(currentUser);
     }
 
-    public void senreigistrerPatient(String email, String password) //faute d'orthographe!!
-    {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                          // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                          //  updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(ConnexionActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                        }
 
-                        // ...
-                    }
-                });
-
-    }
-
-    public void seConnecter(String email, String password)
+    public void seConnecterPatient(String email, String password)
     {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -133,6 +128,39 @@ public class ConnexionActivity extends AppCompatActivity {
                 });
 
     }
+
+    public void seConnecterMedecin(String email, String password)
+    {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            //updateUI(user);
+
+                            //Rediriger ver le profil medecin voici le code :
+                            Intent profilMedecinIntent = new Intent(ConnexionActivity.this , ProfilMedecinActivity.class);
+                            startActivity(profilMedecinIntent);
+
+                            Toast.makeText(ConnexionActivity.this, "Authentication reussi.",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(ConnexionActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
+
+    }
+
 
   /*  private void updateUI(FirebaseUser user) {
 
