@@ -223,9 +223,10 @@ public class InscriptionPatientActivity extends AppCompatActivity {
 
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
-        DocumentReference newPatientRef = db.collection("Patient").document();
 
-        newPatientRef.set(m_patient);
+        //DocumentReference newPatientRef = db.collection("Patient").document();
+
+        //newPatientRef.set(m_patient);
 
         /*
         db.collection("Patient")
