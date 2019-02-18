@@ -222,10 +222,12 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         // enreigister le patient en BD
 
         // Create a new user with a first and last name
-        Map<String, Patient> user = new HashMap<>();
-        user.put("first", m_patient);
+        Map<String, Object> user = new HashMap<>();
+        DocumentReference newPatientRef = db.collection("Patient").document();
 
+        newPatientRef.set(m_patient);
 
+        /*
         db.collection("Patient")
                 .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -241,7 +243,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                     }
                 });
 
-
+                */
     }
 
     /**
