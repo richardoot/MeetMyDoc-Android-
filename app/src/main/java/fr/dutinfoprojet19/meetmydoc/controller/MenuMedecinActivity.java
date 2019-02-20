@@ -82,17 +82,21 @@ public class MenuMedecinActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.activity_menu_medecin_drawer_voir_rdv) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.activity_menu_medecin_drawer_ajouter_creneau) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.activity_menu_medecin_drawer_consulter_calendrier) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.activity_menu_medecin_drawer_voir_profil) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.activity_menu_medecin_drawer_voir_mes_patients) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.activity_menu_medecin_drawer_aide) {
+
+        } else if (id == R.id.activity_menu_medecin_drawer_parametre) {
+
+        } else if (id == R.id.activity_menu_medecin_drawer_deconnexion) {
 
         }
 
