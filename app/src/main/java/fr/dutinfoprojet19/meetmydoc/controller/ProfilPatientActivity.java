@@ -25,13 +25,13 @@ public class ProfilPatientActivity extends AppCompatActivity {
     private static final String TAG ="ProfilPatient" ;
 
     // Objet d'authentification
-    private FirebaseAuth mAuth;
+    //private FirebaseAuth mAuth;
     // Objet pour géerer la BD ( firestore)
-    FirebaseFirestore db;
+    //FirebaseFirestore db;
 
     // utilisateur connecter
 
-    FirebaseUser m_patientConnecte;
+    //FirebaseUser m_patientConnecte;
 
     // le patient
 
@@ -59,6 +59,7 @@ public class ProfilPatientActivity extends AppCompatActivity {
         m_txtAdresse = (TextView) findViewById(R.id.activity_profil_patient_adresse);
         m_txtComplement = (TextView) findViewById(R.id.activity_profil_patient_complement);
 
+       /*
         // initialisation du Auth
         mAuth = FirebaseAuth.getInstance();
 
@@ -104,6 +105,6 @@ public class ProfilPatientActivity extends AppCompatActivity {
                         }
                     }
                 });
-
+*/
     }
 }

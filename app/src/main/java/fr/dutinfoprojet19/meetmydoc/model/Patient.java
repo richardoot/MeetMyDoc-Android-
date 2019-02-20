@@ -15,6 +15,8 @@ public class Patient {
 
     // Constructeur
 
+    public Patient(){}
+
     public Patient(String nom, String prenom, String email, int sexe) {
         m_nom = nom;
         m_prenom = prenom;

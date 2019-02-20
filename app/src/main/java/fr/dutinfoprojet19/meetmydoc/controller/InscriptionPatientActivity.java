@@ -37,7 +37,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
     // Objet d'authentification
         private FirebaseAuth mAuth;
     // Objet pour géerer la BD ( firestore)
-    FirebaseFirestore db;
+   FirebaseFirestore db;
 
     // Déclaration des éléments graphiques
         private TextView m_txtNom;
@@ -61,7 +61,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         // pour richard 2
 
     /**
-     * Booléen  qui indique si la patient a reussi a s'inscrire
+     * Booléen  qui indique si le patient a reussi a s'inscrire
      */
     private Boolean reussiteInscription;
 
@@ -99,7 +99,10 @@ public class InscriptionPatientActivity extends AppCompatActivity {
             m_btnRadioHomme = (RadioButton) findViewById(R.id.activity_inscription_patient_btn_radio_homme);
             m_btnInscription = (Button) findViewById(R.id.activity_inscription_patient_btn_terminer);
 
-
+            for (int i=0; i<10; i++)
+            {
+                Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+i);
+            }
             // action a effectué lorsque l'on clique su le bouton
             m_btnInscription.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -143,12 +146,24 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                     {
                         // les donnnes sont valides (càd les deux mails sont pareil et les deux motDePassed sont pareil
 
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+user);
+                        Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+user.getEmail());
                         senreigistrerPatient(email, motDePasse);
+                        //reussiteInscription=true;
+                        user = mAuth.getCurrentUser();
+                        Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+reussiteInscription);
+                        Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+user);
+                        Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+user.getEmail());
 
-                        if(reussiteInscription)
+                        reussiteInscription=true;
+                        Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+reussiteInscription);
+                        //tester@hotmail.fr
+                        if(reussiteInscription==true) // (if user!=null)
                         {
+
                             // L'inscription s'est bien derouler donc on crée le patient en base de donnée
-                            creerPatient(nom, prenom, email, sexe);
+                            //creerPatient(nom, prenom, email, sexe);
 
                             // on redirige le patient vers la page d'acceuil | vers son profil pour la premiere version
 
@@ -182,10 +197,11 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            // updateUI(user);
+                            //updateUI(user);
+
 
                             // mettre a jour le statuts de l'insription
-                            reussiteInscription=true;
+                            //reussiteInscription=true;
                         }
                         else
                         {
@@ -197,7 +213,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                             //updateUI(null);
 
                             // mettre a jour le statuts de l'insription
-                            reussiteInscription=false;
+                            //reussiteInscription=false;
 
                         }
 
@@ -222,12 +238,15 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         // enreigister le patient en BD
 
         // Create a new user with a first and last name
-        Map<String, Object> user = new HashMap<>();
-        DocumentReference newPatientRef = db.collection("Patient").document();
+        Map<String, Patient> user = new HashMap<>();
+        user.put("first", m_patient);
 
-        newPatientRef.set(m_patient);
+        //DocumentReference newPatientRef = db.collection("Patient").document();
 
-        /*
+        //db.collection("Patient").document("LA").set(m_patient);
+        //newPatientRef.set(m_patient);
+
+
         db.collection("Patient")
                 .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -243,7 +262,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                     }
                 });
 
-                */
+
     }
 
     /**
@@ -271,6 +290,20 @@ public class InscriptionPatientActivity extends AppCompatActivity {
 
 
 
+    private void updateUI(FirebaseUser user)
+    {
+
+        if (user != null)
+        {
+            reussiteInscription = true;
+
+        }
+        else
+        {
+
+            reussiteInscription = false;
+        }
+    }
 
 
     public void showDatePickerDialog(View v) {
