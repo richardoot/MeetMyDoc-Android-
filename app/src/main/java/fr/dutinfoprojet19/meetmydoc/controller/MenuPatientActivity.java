@@ -3,6 +3,8 @@ package fr.dutinfoprojet19.meetmydoc.controller;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,13 +15,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
+import fr.dutinfoprojet19.meetmydoc.R;
+
+public class MenuPatientActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_menu_patient);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_patient, menu);
         return true;
     }
 
@@ -78,21 +82,39 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+            int id = item.getItemId();
+            Fragment fragment = null;
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        //Déterminer le fragment qui est appelé
+            if (id == R.id.activity_menu_patient_drawer_prd_rdv) {
+                // Permet de prendre un RDV
+            } else if (id == R.id.activity_menu_patient_drawer_voir_rdv) {
 
-        } else if (id == R.id.nav_slideshow) {
+            } else if (id == R.id.activity_menu_patient_drawer_voir_profil) {
+                fragment = new ProfilFragment();
+            } else if (id == R.id.activity_menu_patient_drawer_medecin_favoris) {
 
-        } else if (id == R.id.nav_manage) {
+            } else if (id == R.id.activity_menu_patient_drawer_voir_dossier) {
 
-        } else if (id == R.id.nav_share) {
+            } else if (id == R.id.activity_menu_patient_drawer_partager_dossier) {
 
-        } else if (id == R.id.nav_send) {
+            } else if (id == R.id.activity_menu_patient_drawer_aide) {
 
-        }
+            } else if (id == R.id.activity_menu_patient_drawer_parametre) {
+
+            } else if (id == R.id.activity_menu_patient_drawer_deconnexion) {
+
+            }
+
+
+        //
+            if(fragment != null){
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.mainFrame, fragment);
+                ft.commit();
+            }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

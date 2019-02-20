@@ -14,9 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".controller.MainActivity"
-            android:label="@string/title_activity_main"
+            android:name=".controller.MenuMedecinActivity"
+            android:label="@string/title_activity_menu_medecin"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".controller.MenuPatientActivity"
+            android:label="@string/title_activity_menu_patient"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".controller.ChoixConnexionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

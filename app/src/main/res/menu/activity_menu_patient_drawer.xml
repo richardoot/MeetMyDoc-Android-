@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item android:title="RDV">
+            <menu>
+                <item
+                    android:id="@+id/activity_menu_patient_drawer_prd_rdv"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="Prendre rendez-vous" />
+                <item
+                    android:id="@+id/activity_menu_patient_drawer_voir_rdv"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Voir mes rendez-vous" />
+            </menu>
+        </item>
+
+        <item android:title="Mon Profil">
+            <menu>
+                <item
+                    android:id="@+id/activity_menu_patient_drawer_voir_profil"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="Voir profil" />
+                <item
+                    android:id="@+id/activity_menu_patient_drawer_medecin_favoris"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Médecin favoris" />
+            </menu>
+        </item>
+
+        <item android:title="Dossier patient">
+            <menu>
+                <item
+                    android:id="@+id/activity_menu_patient_drawer_voir_dossier"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="Voir dossier" />
+                <item
+                    android:id="@+id/activity_menu_patient_drawer_partager_dossier"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Partager dossier" />
+            </menu>
+        </item>
+
+        <item android:title="Autres">
+            <menu>
+                <item
+                    android:id="@+id/activity_menu_patient_drawer_aide"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="Aide" />
+                <item
+                    android:id="@+id/activity_menu_patient_drawer_parametre"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Paramètres" />
+            </menu>
+        </item>
+
+        <item
+            android:id="@+id/activity_menu_patient_drawer_deconnexion"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Deconnexion" />
+    </group>
+
+
+
+</menu>
