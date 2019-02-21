@@ -1,10 +1,12 @@
 package fr.dutinfoprojet19.meetmydoc.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,12 +17,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import fr.dutinfoprojet19.meetmydoc.R;
+
 
 public class MenuPatientActivity extends AppCompatActivity
         implements
         ProfilFragment.OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
+
+    //Déclaration
+        private FirebaseAuth m_Auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +114,24 @@ public class MenuPatientActivity extends AppCompatActivity
 
             } else if (id == R.id.activity_menu_patient_drawer_deconnexion) {
 
+                if(m_Auth.getCurrentUser() != null){
+                    //Voir sur la console s'il y a quelqu'un de connecté
+                    Log.d("Avant Deconnexion", "Il est connecté");
+
+                    //Déconnecter l'utilisateur courrant
+                    m_Auth.signOut();
+
+                    if(m_Auth.getCurrentUser() == null){
+                        //Voir sur la console si la personne c'est déconnecté
+                        Log.d("Après Deconnexion", "Il est plus connecté");
+                    }
+
+                    //Rédiriger l'utilisateur vers la première activitée
+                        Intent choixConnexionIntent = new Intent(MenuPatientActivity.this, ChoixConnexionActivity.class);
+                        startActivity(choixConnexionIntent);
+
+
+                }
             }
 
 
