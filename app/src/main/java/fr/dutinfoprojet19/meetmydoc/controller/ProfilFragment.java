@@ -64,16 +64,21 @@ public class ProfilFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Demande de changement du titre
+            if (mListener != null) {
+                mListener.onFragmentInteractionChangeTitle("Profil");
+            }
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profil, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+/*    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
-    }
+    }*/
 
     @Override
     public void onAttach(Context context) {
@@ -104,6 +109,6 @@ public class ProfilFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteractionChangeTitle(String titre);
     }
 }

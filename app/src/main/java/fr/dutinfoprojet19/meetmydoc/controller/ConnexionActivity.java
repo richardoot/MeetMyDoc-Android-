@@ -142,8 +142,12 @@ public class ConnexionActivity extends AppCompatActivity {
                             //updateUI(user);
 
                             //Rediriger ver le profil medecin voici le code :
-                            Intent profilMedecinIntent = new Intent(ConnexionActivity.this , ProfilMedecinActivity.class);
-                            startActivity(profilMedecinIntent);
+                                //Intent profilMedecinIntent = new Intent(ConnexionActivity.this , ProfilMedecinActivity.class);
+                                //startActivity(profilMedecinIntent);
+
+                            //Rediriger ver le menu patient
+                                Intent menuPatientIntent = new Intent(ConnexionActivity.this, MenuPatientActivity.class);
+                                startActivity(menuPatientIntent);
 
                             Toast.makeText(ConnexionActivity.this, "Authentication reussi.",
                                     Toast.LENGTH_SHORT).show();

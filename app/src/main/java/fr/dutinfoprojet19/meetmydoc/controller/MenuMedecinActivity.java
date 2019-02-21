@@ -3,6 +3,8 @@ package fr.dutinfoprojet19.meetmydoc.controller;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,7 +18,9 @@ import android.view.MenuItem;
 import fr.dutinfoprojet19.meetmydoc.R;
 
 public class MenuMedecinActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements
+        ProfilFragment.OnFragmentInteractionListener,
+        NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +29,14 @@ public class MenuMedecinActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+/*        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -81,23 +85,39 @@ public class MenuMedecinActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Fragment fragment = null;
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.activity_menu_medecin_drawer_voir_rdv) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.activity_menu_medecin_drawer_ajouter_creneau) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.activity_menu_medecin_drawer_consulter_calendrier) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.activity_menu_medecin_drawer_voir_profil) {
+            fragment = new ProfilFragment();
+        } else if (id == R.id.activity_menu_medecin_drawer_voir_mes_patients) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.activity_menu_medecin_drawer_aide) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.activity_menu_medecin_drawer_parametre) {
 
+        } else if (id == R.id.activity_menu_medecin_drawer_deconnexion) {
+
+        }
+
+        if(fragment != null){
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.mainFrame_medecin, fragment);
+            ft.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteractionChangeTitle(String titre) {
+        getSupportActionBar().setTitle(titre);
     }
 }

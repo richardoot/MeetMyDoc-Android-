@@ -24,7 +24,7 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
 
 
     // Constante
-        private static final String TAG = "InscriptionPatient";
+        private static final String TAG = "InscriptionMedecin";
 
     // Objet d'authentification
         private FirebaseAuth m_Auth;
@@ -57,6 +57,9 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription_medecin);
 
+        // initialisation de l'instance FirebaseAuth
+            m_Auth = FirebaseAuth.getInstance();
+
         // Référencement graphique
             m_txtNom = (TextView) findViewById(R.id.activity_inscription_medecin_txt_nom);
             m_txtPrenom = (TextView) findViewById(R.id.activity_inscription_medecin_txt_prenom);
@@ -82,40 +85,65 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // Récupérer email et mdp
-                    String saisieEmail = m_inputEmail.getText().toString();
-                    String saisieEmailConfirmer = m_inputEmailConfirmer.getText().toString();
-                    String saisiePassword = m_inputMotDePasse.getText().toString();
-                    String saisiePasswordConfirmer = m_inputMotDePasseConfirmer.getText().toString();
+                    String email = m_inputEmail.getText().toString();
+                    String emailConfirmer = m_inputEmailConfirmer.getText().toString();
+                    String motDePasse = m_inputMotDePasse.getText().toString();
+                    String motDePasseConfirmer = m_inputMotDePasseConfirmer.getText().toString();
 
                     //Récupérer les autres informations
-                    String saisieNom = m_inputNom.getText().toString();
-                    String saisiePrenom = m_inputPrenom.getText().toString();
+                    String nom = m_inputNom.getText().toString();
+                    String prenom = m_inputPrenom.getText().toString();
+                    int sexe;
 
                     // Effectuer l'inscription
                     //Vérifier la cohérence de tous les éléments
-                    if (!saisieNom.matches("") && !saisiePrenom.matches("") && (m_btnRadioFemme.isChecked() || m_btnRadioHomme.isChecked())
-                            && (!saisieEmail.matches("") || !saisieEmailConfirmer.matches("")) && (!saisiePassword.matches("") || !saisiePassword.matches(""))) {
+                    //Vérifier que toutes les inputs sont saisie
+                    /*if(verificationInputs(nom,prenom,email,motDePasse) && (m_btnRadioFemme.isChecked() || m_btnRadioHomme.isChecked()))
+                    {
 
-                        if (saisieEmail.equals(saisieEmailConfirmer)) {
-                            if (saisiePassword.equals(saisiePasswordConfirmer)) {
-                                //Ajout des éléments en base de données
+                        //Verifier que les 2 mails sont identiques
+                        if(verificationEmail(email, emailConfirmer))
+                        {
+
+                            //Vérifier que les 2 mots de passes sont identiques
+                            if(verificationMotDePasse(motDePasse, motDePasseConfirmer))
+                            {
+                                //Définir le sexe du médecin
+                                if(m_btnRadioFemme.isChecked()) {
+                                    sexe = 0; //c'est une femme
+                                } else {
+                                    sexe = 1; // c'est un homme
+                                }
+
+                                //Inscrire le médecin
+                                senregistrerPatient(email, motDePasse);
+
+                                //Vérifier que l'inscription c'est bien passé
 
 
-                                //Réaliser l'inscription du patient
-                                sInscrire(saisieEmail, saisiePassword);
-                            } else {
-                                Toast.makeText(InscriptionMedecinActivity.this, "Les 2 mots de passe ne sont pas identiques", Toast.LENGTH_SHORT).show();
+                                //Ajouter les informations en bases de données
+
+
+                                //On redirige le Medecin vers la page d'acceuil | vers son profil pour la premiere version
+                                */Intent menuMedecinIntent = new Intent(InscriptionMedecinActivity.this, MenuMedecinActivity.class);
+                                startActivity(menuMedecinIntent);/*
                             }
-                        } else {
-                            Toast.makeText(InscriptionMedecinActivity.this, "Les 2 emails ne sont pas identiques", Toast.LENGTH_SHORT).show();
+                            else{
+                                Toast.makeText(InscriptionMedecinActivity.this, "Les mots de passe ne sont pas identique", Toast.LENGTH_SHORT).show();
+
+                            }
                         }
-                    } else {
-                        Toast.makeText(InscriptionMedecinActivity.this, "Il y a des informations manquantes", Toast.LENGTH_SHORT).show();
+                        else{
+                            Toast.makeText(InscriptionMedecinActivity.this, "Les mails ne sont pas identiques", Toast.LENGTH_SHORT).show();
+                        }
                     }
+                    else{
+                        Toast.makeText(InscriptionMedecinActivity.this, "Toutes les informations n'ont pas été saisie", Toast.LENGTH_SHORT).show();
+
+                    }*/
 
                 }
             });
-
 
     }
 
@@ -126,7 +154,7 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
         //updateUI(currentUser);
     }
 
-    public void sInscrire(String email, String password) {
+    public void senregistrerPatient(String email, String password) {
 
         m_Auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -153,4 +181,41 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
                 });
 
     }
+
+
+
+    /**
+     * Permet de vérifier les donnees saisie par le parient (mail et mot de passe)
+     * @param email
+     * @param emailConfirmer
+     * @return - true si les données sont correct et false si inverse
+     */
+    public boolean verificationEmail(String email, String emailConfirmer)
+    {
+        return  (email.equals(emailConfirmer)) ;
+    }
+
+    /**
+     *
+     * @param motDepasse
+     * @param motDePasseConfirmer
+     * @return
+     */
+    public boolean verificationMotDePasse(String motDepasse, String motDePasseConfirmer)
+    {
+        return (motDepasse.equals(motDePasseConfirmer));
+    }
+
+    /**
+     *
+     * @param nom
+     * @param prenom
+     * @param email
+     * @param mdp
+     * @return
+     */
+    public boolean verificationInputs(String nom, String prenom, String email, String mdp){
+        return (!nom.matches("") && !prenom.matches("") && !email.matches("") && !mdp.matches(""));
+    }
+
 }
