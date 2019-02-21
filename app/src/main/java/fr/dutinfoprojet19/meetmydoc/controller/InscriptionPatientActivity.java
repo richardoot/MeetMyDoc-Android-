@@ -36,6 +36,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
 
     // Objet d'authentification
         private FirebaseAuth m_Auth;
+        
     // Objet pour géerer la BD ( firestore)
         FirebaseFirestore db;
 
@@ -59,7 +60,6 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         private Button m_btnInscription;
 
 
-
     /**
      * Booléen  qui indique si le patient a reussi a s'inscrire
      */
@@ -75,7 +75,6 @@ public class InscriptionPatientActivity extends AppCompatActivity {
             m_Auth = FirebaseAuth.getInstance();
 
         // initialialisation de l'instance FirebaseFirestore
-
            db = FirebaseFirestore.getInstance();
 
         // Référencement graphique
@@ -104,7 +103,6 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                 public void onClick(View v) {
 
                     // recupêrer les données saisies
-
                     final String nom=m_inputNom.getText().toString();
                     final String prenom=m_inputPrenom.getText().toString();
                     final String email=m_inputEmail.getText().toString();
@@ -135,17 +133,17 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                                     //Inscrire le patient
                                         senregistrerPatient(email, motDePasse);
 
-                                    //Vérifier que l'inscription c'est bien passé
-
-                                    //Ajouter les informations en bases de données
-                                    //if(reussiteInscription){
+                                    /*Vérifier que l'inscription c'est bien passé puis
+                                    ajouter les informations en bases de données*/
+                                    if(reussiteInscription){
                                         //L'inscription s'est bien derouler donc on crée le patient en base de donnée
-                                            creerPatient(nom, prenom, email, sexe);
-                                    //}
+                                            mettreEnBD(nom, prenom, email, sexe);
 
-                                    //On redirige le patient vers la page d'acceuil | vers son profil pour la premiere version
-                                        Intent menuPatientIntent = new Intent(InscriptionPatientActivity.this, MenuPatientActivity.class);
-                                        startActivity(menuPatientIntent);
+                                        //On redirige le patient vers la page d'acceuil | vers son profil pour la premiere version
+                                            Intent menuPatientIntent = new Intent(InscriptionPatientActivity.this, MenuPatientActivity.class);
+                                            startActivity(menuPatientIntent);
+                                    }
+
                                 }
                                 else{
                                     Toast.makeText(InscriptionPatientActivity.this, "Les mots de passe ne sont pas identique ", Toast.LENGTH_SHORT).show();
@@ -159,33 +157,6 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                             Toast.makeText(InscriptionPatientActivity.this, "Toutes les informations n'ont pas été saisie ", Toast.LENGTH_SHORT).show();
                         }
 
-
-                    // verifier les donnees saisie par le patient pour creer le compte du patient
-
-                    /*if (verificationEmail(email, emailConfirmer) && verificationMotDePasse(motDePasse, motDePasseConfirmer))
-                    {
-                        // les donnnes sont valides (càd les deux mails sont pareil et les deux motDePassed sont pareil
-                            //FirebaseUser user = m_Auth.getCurrentUser();
-
-                            senregistrerPatient(email, motDePasse);
-                            //reussiteInscription=true;
-                            //user = m_Auth.getCurrentUser();
-
-                        //reussiteInscription=true;
-                        //if(reussiteInscription==true) // (if user!=null)
-                        //{
-
-                            // L'inscription s'est bien derouler donc on crée le patient en base de donnée
-                                //creerPatient(nom, prenom, email, sexe);
-
-                            // on redirige le patient vers la page d'acceuil | vers son profil pour la premiere version
-                                Intent profilPatientIntent = new Intent(InscriptionPatientActivity.this, ProfilPatientActivity.class);
-                                startActivity(profilPatientIntent);
-                        //}
-
-                    }*/
-
-
                 }
             });
 
@@ -196,7 +167,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = m_Auth.getCurrentUser();
-        //updateUI(currentUser);
+        updateUI(currentUser);
     }
 
     public void senregistrerPatient(String email, String password)
@@ -209,31 +180,24 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = m_Auth.getCurrentUser();
-                            //updateUI(user);
-
-
-                            // mettre a jour le statuts de l'insription
-                            reussiteInscription=true;
+                            updateUI(user);
                         }
                         else
                         {
-
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(InscriptionPatientActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-
-                            // mettre a jour le statuts de l'insription
-                            reussiteInscription=false;
-
+                            updateUI(null);
                         }
+
                     }
+
                 });
 
     }
 
-    /**
+ /*   /**
      *  Sert à créer le patient avec le service de fireStore( en base de donnée)
      *  et au services d'authentification lors de son incription
      * @param nom - le nom du patient
@@ -241,7 +205,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
      * @param email - l'email du patient
      * @param sexe - égale 0 si c'est une femme et 1 si c'est un homme
      */
-    public void creerPatient(String nom, String prenom, String email, int sexe)
+    /*public void creerPatient(String nom, String prenom, String email, int sexe)
     {
         //Initialiser le patient
         Patient m_patient=new Patient(nom, prenom, email, sexe);
@@ -269,8 +233,28 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+    }*/
 
+    public void mettreEnBD(String nom, String prenom, String email, int sexe){
+        Map<String, Object> utilisateur = new HashMap<>();
+        utilisateur.put("nom", nom);
+        utilisateur.put("prenom", prenom);
+        utilisateur.put("sexe", sexe);
 
+        db.collection("Patient").document(email)
+                .set(utilisateur)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
     }
 
     /**
@@ -308,13 +292,13 @@ public class InscriptionPatientActivity extends AppCompatActivity {
     }
 
 
-    /*private void updateUI(FirebaseUser user){
+    public void updateUI(FirebaseUser user){
         if (user != null){
             reussiteInscription = true;
         } else {
             reussiteInscription = false;
         }
-    }*/
+    }
 
 
     public void showDatePickerDialog(View v) {

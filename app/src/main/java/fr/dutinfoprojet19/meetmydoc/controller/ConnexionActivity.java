@@ -54,35 +54,23 @@ public class ConnexionActivity extends AppCompatActivity {
                     public void onClick(View v) {
 
                         //recuperer les parametre
-                        String mailSaisie= m_email.getText().toString();
-                        String passwordSaisie=m_password.getText().toString();
+                        String mailSaisie = m_email.getText().toString();
+                        String passwordSaisie =m_password.getText().toString();
 
                         //Vérifier si c'est un patient ou un medecin selon le bouton appuyer avant
 
                         /*
-                        if()
-                        {
+                        if(){
                             //patient
-
-                            // appeler se connecter
+                            // appeler se connecter*/
                             seConnecterPatient(mailSaisie, passwordSaisie);
-
-
-                        }
-                        else
-                        {
+                        /*} else {
                             // c'est un patient
 
                             // appler se connecter medecin
                             seConnecterMedecin(mailSaisie, passwordSaisie);
                         }
-
                         */
-
-
-
-
-
                     }
                 });
 
@@ -145,9 +133,14 @@ public class ConnexionActivity extends AppCompatActivity {
                                 //Intent profilMedecinIntent = new Intent(ConnexionActivity.this , ProfilMedecinActivity.class);
                                 //startActivity(profilMedecinIntent);
 
-                            //Rediriger ver le menu patient
+                            //Rediriger vers le menu patient
                                 Intent menuPatientIntent = new Intent(ConnexionActivity.this, MenuPatientActivity.class);
                                 startActivity(menuPatientIntent);
+
+                            //Rediriger vers le menu medecin
+                                /*Intent menuMedecinIntent = new Intent(ConnexionActivity.this, MenuMedecinActivity.class);
+                                startActivity(menuMedecinIntent);*/
+
 
                             Toast.makeText(ConnexionActivity.this, "Authentication reussi.",
                                     Toast.LENGTH_SHORT).show();
