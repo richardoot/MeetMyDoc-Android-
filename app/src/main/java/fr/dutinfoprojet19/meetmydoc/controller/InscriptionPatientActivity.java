@@ -35,9 +35,9 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         private static final String TAG ="InscriptionPatient" ;
 
     // Objet d'authentification
-        private FirebaseAuth mAuth;
+        private FirebaseAuth m_Auth;
     // Objet pour géerer la BD ( firestore)
-   FirebaseFirestore db;
+        FirebaseFirestore db;
 
     // Déclaration des éléments graphiques
         private TextView m_txtNom;
@@ -58,14 +58,12 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         private RadioButton m_btnRadioHomme;
         private Button m_btnInscription;
 
-        // pour richard 2
+
 
     /**
      * Booléen  qui indique si le patient a reussi a s'inscrire
      */
-    private Boolean reussiteInscription;
-
-    // pour richard
+     private Boolean reussiteInscription;
 
 
     @Override
@@ -74,7 +72,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inscription_patient);
 
         // initialisation de l'instance FirebaseAuth
-            mAuth = FirebaseAuth.getInstance();
+            m_Auth = FirebaseAuth.getInstance();
 
         // initialialisation de l'instance FirebaseFirestore
 
@@ -99,10 +97,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
             m_btnRadioHomme = (RadioButton) findViewById(R.id.activity_inscription_patient_btn_radio_homme);
             m_btnInscription = (Button) findViewById(R.id.activity_inscription_patient_btn_terminer);
 
-            for (int i=0; i<10; i++)
-            {
-                Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+i);
-            }
+
             // action a effectué lorsque l'on clique su le bouton
             m_btnInscription.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -118,60 +113,77 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                     final String motDePasseConfirmer=m_inputMotDePasseConfirmer.getText().toString();
                     int sexe;
 
-                    if(m_btnRadioFemme.isChecked())
-                    {
-                        // c'est une femme
-                        sexe = 0;
-                    }
-                    else
-                    {
-                        // c'est un homme
-                        sexe=1;
-                    }
 
+                    //Vérifier que toutes les inputs sont saisie
+                        if(verificationInputs(nom,prenom,email,motDePasse) && (m_btnRadioFemme.isChecked() || m_btnRadioHomme.isChecked()))
+                        {
 
-                    if(!verificationEmail(email, emailConfirmer))
-                    {
-                        Toast.makeText(InscriptionPatientActivity.this, "Les mails ne sont pas identiques ", Toast.LENGTH_SHORT).show();
-                    }
+                            //Verifier que les 2 mails sont identiques
+                            if(verificationEmail(email, emailConfirmer))
+                            {
 
-                    if(!verificationEmail(email, emailConfirmer))
-                    {
-                        Toast.makeText(InscriptionPatientActivity.this, "Les mots de passe ne sont pas identique ", Toast.LENGTH_SHORT).show();
-                    }
+                                //Vérifier que les 2 mots de passes sont identiques
+                                if(verificationMotDePasse(motDePasse, motDePasseConfirmer))
+                                {
+                                    //Définir le sexe du patient
+                                        if(m_btnRadioFemme.isChecked()) {
+                                            sexe = 0; //c'est une femme
+                                        } else {
+                                            sexe = 1; // c'est un homme
+                                        }
+
+                                    //Inscrire le patient
+                                        senregistrerPatient(email, motDePasse);
+
+                                    //Vérifier que l'inscription c'est bien passé
+
+                                    //Ajouter les informations en bases de données
+                                    //if(reussiteInscription){
+                                        //L'inscription s'est bien derouler donc on crée le patient en base de donnée
+                                            creerPatient(nom, prenom, email, sexe);
+                                    //}
+
+                                    //On redirige le patient vers la page d'acceuil | vers son profil pour la premiere version
+                                        Intent menuPatientIntent = new Intent(InscriptionPatientActivity.this, MenuPatientActivity.class);
+                                        startActivity(menuPatientIntent);
+                                }
+                                else{
+                                    Toast.makeText(InscriptionPatientActivity.this, "Les mots de passe ne sont pas identique ", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            else{
+                                Toast.makeText(InscriptionPatientActivity.this, "Les mails ne sont pas identiques ", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else{
+                            Toast.makeText(InscriptionPatientActivity.this, "Toutes les informations n'ont pas été saisie ", Toast.LENGTH_SHORT).show();
+                        }
+
 
                     // verifier les donnees saisie par le patient pour creer le compte du patient
 
-                    if (verificationEmail(email, emailConfirmer) &&verificationMotDePasse(motDePasse, motDePasseConfirmer))
+                    /*if (verificationEmail(email, emailConfirmer) && verificationMotDePasse(motDePasse, motDePasseConfirmer))
                     {
                         // les donnnes sont valides (càd les deux mails sont pareil et les deux motDePassed sont pareil
+                            //FirebaseUser user = m_Auth.getCurrentUser();
 
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+user);
-                        Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+user.getEmail());
-                        senreigistrerPatient(email, motDePasse);
+                            senregistrerPatient(email, motDePasse);
+                            //reussiteInscription=true;
+                            //user = m_Auth.getCurrentUser();
+
                         //reussiteInscription=true;
-                        user = mAuth.getCurrentUser();
-                        Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+reussiteInscription);
-                        Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+user);
-                        Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+user.getEmail());
-
-                        reussiteInscription=true;
-                        Log.d(TAG, "BONJOUUUUUUUUUUUUUUUUUUUR"+reussiteInscription);
-                        //tester@hotmail.fr
-                        if(reussiteInscription==true) // (if user!=null)
-                        {
+                        //if(reussiteInscription==true) // (if user!=null)
+                        //{
 
                             // L'inscription s'est bien derouler donc on crée le patient en base de donnée
-                            //creerPatient(nom, prenom, email, sexe);
+                                //creerPatient(nom, prenom, email, sexe);
 
                             // on redirige le patient vers la page d'acceuil | vers son profil pour la premiere version
+                                Intent profilPatientIntent = new Intent(InscriptionPatientActivity.this, ProfilPatientActivity.class);
+                                startActivity(profilPatientIntent);
+                        //}
 
-                            Intent profilPatientIntent = new Intent(InscriptionPatientActivity.this, ProfilPatientActivity.class);
-                            startActivity(profilPatientIntent);
-                        }
-
-                    }
+                    }*/
 
 
                 }
@@ -183,25 +195,25 @@ public class InscriptionPatientActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser currentUser = m_Auth.getCurrentUser();
         //updateUI(currentUser);
     }
 
-    public void senreigistrerPatient(String email, String password) //faute d'orthographe!!
+    public void senregistrerPatient(String email, String password)
     {
-        mAuth.createUserWithEmailAndPassword(email, password)
+        m_Auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser user = m_Auth.getCurrentUser();
                             //updateUI(user);
 
 
                             // mettre a jour le statuts de l'insription
-                            //reussiteInscription=true;
+                            reussiteInscription=true;
                         }
                         else
                         {
@@ -213,11 +225,9 @@ public class InscriptionPatientActivity extends AppCompatActivity {
                             //updateUI(null);
 
                             // mettre a jour le statuts de l'insription
-                            //reussiteInscription=false;
+                            reussiteInscription=false;
 
                         }
-
-                        // ...
                     }
                 });
 
@@ -229,23 +239,21 @@ public class InscriptionPatientActivity extends AppCompatActivity {
      * @param nom - le nom du patient
      * @param prenom -le prenom du patient
      * @param email - l'email du patient
-     * @param sexe - égale 0 si c'est un femme et 1 si c'est un homme
+     * @param sexe - égale 0 si c'est une femme et 1 si c'est un homme
      */
     public void creerPatient(String nom, String prenom, String email, int sexe)
     {
+        //Initialiser le patient
         Patient m_patient=new Patient(nom, prenom, email, sexe);
 
         // enreigister le patient en BD
-
         // Create a new user with a first and last name
         Map<String, Patient> user = new HashMap<>();
         user.put("first", m_patient);
 
         //DocumentReference newPatientRef = db.collection("Patient").document();
-
         //db.collection("Patient").document("LA").set(m_patient);
         //newPatientRef.set(m_patient);
-
 
         db.collection("Patient")
                 .add(user)
@@ -284,26 +292,29 @@ public class InscriptionPatientActivity extends AppCompatActivity {
      */
     public boolean verificationMotDePasse(String motDepasse, String motDePasseConfirmer)
     {
-        return ((motDepasse.equals(motDePasseConfirmer)) );
+        return (motDepasse.equals(motDePasseConfirmer));
+    }
+
+    /**
+     *
+     * @param nom
+     * @param prenom
+     * @param email
+     * @param mdp
+     * @return
+     */
+    public boolean verificationInputs(String nom, String prenom, String email, String mdp){
+        return (!nom.matches("") && !prenom.matches("") && !email.matches("") && !mdp.matches(""));
     }
 
 
-
-
-    private void updateUI(FirebaseUser user)
-    {
-
-        if (user != null)
-        {
+    /*private void updateUI(FirebaseUser user){
+        if (user != null){
             reussiteInscription = true;
-
-        }
-        else
-        {
-
+        } else {
             reussiteInscription = false;
         }
-    }
+    }*/
 
 
     public void showDatePickerDialog(View v) {

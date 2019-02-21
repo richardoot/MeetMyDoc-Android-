@@ -9,8 +9,8 @@
     tools:showIn="@layout/app_bar_menu_patient">
 
     <FrameLayout
-        android:id="@+id/mainFrame"
+        android:id="@+id/mainFrame_patient"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent"/>
 
 </android.support.constraint.ConstraintLayout>
