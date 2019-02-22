@@ -97,9 +97,9 @@ public class ConnexionActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
 
-                            //Rediriger vers le menu patient
-                                Intent menuPatientIntent = new Intent(ConnexionActivity.this, MenuPatientActivity.class);
-                                startActivity(menuPatientIntent);
+                            //Rediriger ver le profil patient voici le code :
+                        Intent profilPatientIntent = new Intent(ConnexionActivity.this , ProfilPatientActivity.class);
+                        startActivity(profilPatientIntent);
 
                             Toast.makeText(ConnexionActivity.this, "Authentication reussi.",
                                     Toast.LENGTH_SHORT).show();
@@ -111,6 +111,7 @@ public class ConnexionActivity extends AppCompatActivity {
                             //updateUI(null);
                         }
 
+                        // ...
                     }
                 });
 
@@ -129,9 +130,12 @@ public class ConnexionActivity extends AppCompatActivity {
                             //updateUI(user);
 
                             //Rediriger ver le profil medecin voici le code :
-                                Intent profilMedecinIntent = new Intent(ConnexionActivity.this , ProfilMedecinActivity.class);
-                                startActivity(profilMedecinIntent);
+                                //Intent profilMedecinIntent = new Intent(ConnexionActivity.this , ProfilMedecinActivity.class);
+                                //startActivity(profilMedecinIntent);
 
+                            //Rediriger vers le menu patient
+                                Intent menuPatientIntent = new Intent(ConnexionActivity.this, MenuPatientActivity.class);
+                                startActivity(menuPatientIntent);
 
                             //Rediriger vers le menu medecin
                                 /*Intent menuMedecinIntent = new Intent(ConnexionActivity.this, MenuMedecinActivity.class);
