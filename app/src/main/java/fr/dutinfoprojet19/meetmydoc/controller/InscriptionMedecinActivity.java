@@ -13,10 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import fr.dutinfoprojet19.meetmydoc.R;
 
@@ -30,7 +36,7 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
         private FirebaseAuth m_Auth;
 
     // Objet Base de données
-        //private FirebaseFirestore m_db = FirebaseFirestore.getInstance();
+        private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     // Déclaration des éléments graphiques
         private TextView m_txtNom;
@@ -52,6 +58,11 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
         private RadioButton m_btnRadioHomme;
         private Button m_btnInscription;
 
+    /**
+     * Booléen  qui indique si le patient a reussi a s'inscrire
+     */
+    private Boolean reussiteInscription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +70,9 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
 
         // initialisation de l'instance FirebaseAuth
             m_Auth = FirebaseAuth.getInstance();
+
+        // initialialisation de l'instance FirebaseFirestore
+            db = FirebaseFirestore.getInstance();
 
         // Référencement graphique
             m_txtNom = (TextView) findViewById(R.id.activity_inscription_medecin_txt_nom);
@@ -96,9 +110,8 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
                     int sexe;
 
                     // Effectuer l'inscription
-                    //Vérifier la cohérence de tous les éléments
                     //Vérifier que toutes les inputs sont saisie
-                    /*if(verificationInputs(nom,prenom,email,motDePasse) && (m_btnRadioFemme.isChecked() || m_btnRadioHomme.isChecked()))
+                    if(verificationInputs(nom,prenom,email,motDePasse) && (m_btnRadioFemme.isChecked() || m_btnRadioHomme.isChecked()))
                     {
 
                         //Verifier que les 2 mails sont identiques
@@ -118,19 +131,19 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
                                 //Inscrire le médecin
                                 senregistrerPatient(email, motDePasse);
 
-                                //Vérifier que l'inscription c'est bien passé
+                                /*Vérifier que l'inscription c'est bien passé puis
+                                ajouter les informations en bases de données*/
+                                if(reussiteInscription){
+                                    //L'inscription s'est bien derouler donc on crée le patient en base de donnée
+                                    mettreEnBD(nom, prenom, email, sexe);
 
-
-                                //Ajouter les informations en bases de données
-
-
-                                //On redirige le Medecin vers la page d'acceuil | vers son profil pour la premiere version
-                                */Intent menuMedecinIntent = new Intent(InscriptionMedecinActivity.this, MenuMedecinActivity.class);
-                                startActivity(menuMedecinIntent);/*
+                                    //On redirige le patient vers la page d'acceuil | vers son profil pour la premiere version
+                                    Intent menuMedecinIntent = new Intent(InscriptionMedecinActivity.this, MenuMedecinActivity.class);
+                                    startActivity(menuMedecinIntent);
+                                }
                             }
                             else{
                                 Toast.makeText(InscriptionMedecinActivity.this, "Les mots de passe ne sont pas identique", Toast.LENGTH_SHORT).show();
-
                             }
                         }
                         else{
@@ -139,8 +152,7 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
                     }
                     else{
                         Toast.makeText(InscriptionMedecinActivity.this, "Toutes les informations n'ont pas été saisie", Toast.LENGTH_SHORT).show();
-
-                    }*/
+                    }
 
                 }
             });
@@ -151,7 +163,7 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = m_Auth.getCurrentUser();
-        //updateUI(currentUser);
+        updateUI(currentUser);
     }
 
     public void senregistrerPatient(String email, String password) {
@@ -165,16 +177,15 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = m_Auth.getCurrentUser();
 
-                            //Rediriger vers la page de connexion
-                            Intent connexionIntent = new Intent(InscriptionMedecinActivity.this, ConnexionActivity.class);
-                            startActivity(connexionIntent);
+                            updateUI(user);
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(InscriptionMedecinActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+
+                            updateUI(null);
                         }
 
                     }
@@ -182,7 +193,27 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
 
     }
 
+    public void mettreEnBD(String nom, String prenom, String email, int sexe){
+        Map<String, Object> utilisateur = new HashMap<>();
+        utilisateur.put("nom", nom);
+        utilisateur.put("prenom", prenom);
+        utilisateur.put("sexe", sexe);
 
+        db.collection("Medecin").document(email)
+                .set(utilisateur)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+    }
 
     /**
      * Permet de vérifier les donnees saisie par le parient (mail et mot de passe)
@@ -216,6 +247,14 @@ public class InscriptionMedecinActivity extends AppCompatActivity {
      */
     public boolean verificationInputs(String nom, String prenom, String email, String mdp){
         return (!nom.matches("") && !prenom.matches("") && !email.matches("") && !mdp.matches(""));
+    }
+
+    public void updateUI(FirebaseUser user){
+        if (user != null){
+            reussiteInscription = true;
+        } else {
+            reussiteInscription = false;
+        }
     }
 
 }

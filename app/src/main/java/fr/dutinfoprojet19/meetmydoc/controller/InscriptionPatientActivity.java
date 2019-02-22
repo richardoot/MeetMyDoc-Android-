@@ -36,7 +36,7 @@ public class InscriptionPatientActivity extends AppCompatActivity {
 
     // Objet d'authentification
         private FirebaseAuth m_Auth;
-        
+
     // Objet pour géerer la BD ( firestore)
         FirebaseFirestore db;
 

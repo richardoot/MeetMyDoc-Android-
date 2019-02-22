@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.ProfilFragment">
+    tools:context=".controller.ProfilMedecinFragment">
 
 
     <LinearLayout
@@ -25,7 +25,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_txt_email"
+                    android:id="@+id/fragment_profil_medecin_txt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
@@ -33,7 +33,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_email"
+                    android:id="@+id/fragment_profil_medecin_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
@@ -47,7 +47,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_txt_adresse"
+                    android:id="@+id/fragment_profil_medecin_txt_adresse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
@@ -55,7 +55,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_adresse"
+                    android:id="@+id/fragment_profil_medecin_adresse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
@@ -75,7 +75,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/activity_profil_medecin_txt_code_postal"
+                        android:id="@+id/fragment_profil_medecin_txt_code_postal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20px"
@@ -83,7 +83,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/activity_profil_medecin_code_postal"
+                        android:id="@+id/fragment_profil_medecin_code_postal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20px"
@@ -98,14 +98,14 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/activity_profil_medecin_txt_ville"
+                        android:id="@+id/fragment_profil_medecin_txt_ville"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Ville:"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/activity_profil_medecin_ville"
+                        android:id="@+id/fragment_profil_medecin_ville"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -121,7 +121,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_txt_telephone"
+                    android:id="@+id/fragment_profil_medecin_txt_telephone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
@@ -129,7 +129,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_telephone"
+                    android:id="@+id/fragment_profil_medecin_telephone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
@@ -143,7 +143,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_txt_date_naissance"
+                    android:id="@+id/fragment_profil_medecin_txt_date_naissance"
                     android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                     android:layout_marginLeft="20px"/>
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_date_naissance"
+                    android:id="@+id/fragment_profil_medecin_date_naissance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Conventionné secteur 1"
@@ -165,7 +165,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_txt_complement"
+                    android:id="@+id/fragment_profil_medecin_txt_complement"
                     android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                     android:text="Moyen de paiement:" />
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_complement"
+                    android:id="@+id/fragment_profil_medecin_complement"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
@@ -187,7 +187,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_txt_notification"
+                    android:id="@+id/fragment_profil_medecin_txt_notification"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
@@ -195,7 +195,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/activity_profil_medecin_notification1"
+                    android:id="@+id/fragment_profil_medecin_notification1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20px"
@@ -210,7 +210,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/activity_profil_medecin_btn"
+                    android:id="@+id/fragment_profil_medecin_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

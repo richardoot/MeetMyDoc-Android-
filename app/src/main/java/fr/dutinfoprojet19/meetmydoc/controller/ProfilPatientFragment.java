@@ -1,28 +1,55 @@
 package fr.dutinfoprojet19.meetmydoc.controller;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import fr.dutinfoprojet19.meetmydoc.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ProfilFragment.OnFragmentInteractionListener} interface
+ * {@link ProfilPatientFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ProfilFragment#newInstance} factory method to
+ * Use the {@link ProfilPatientFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfilFragment extends Fragment {
+public class ProfilPatientFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    //Déclarations
+        TextView m_email;
+        TextView m_nomPrenom;
+        TextView m_sexe; //Pas utilisé
+        TextView m_dateNaiss;
+        TextView m_telephone;
+        TextView m_codePostal;
+        TextView m_ville;
+        TextView m_adresse;
+
+    // initialisation de l'instance FirebaseAuth
+        FirebaseAuth m_Auth = FirebaseAuth.getInstance();
+
+    // Objet Base de données
+        private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -30,7 +57,7 @@ public class ProfilFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public ProfilFragment() {
+    public ProfilPatientFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +67,11 @@ public class ProfilFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfilFragment.
+     * @return A new instance of fragment ProfilPatientFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfilFragment newInstance(String param1, String param2) {
-        ProfilFragment fragment = new ProfilFragment();
+    public static ProfilPatientFragment newInstance(String param1, String param2) {
+        ProfilPatientFragment fragment = new ProfilPatientFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,14 +90,40 @@ public class ProfilFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState/*, View view*/) {
+        /*//Référencement Graphique
+            m_nomPrenom = (TextView) getView().findViewById(R.id.fragment_profil_patient_prenom_nom);
+            m_adresse = (TextView) getView().findViewById(R.id.fragment_profil_patient_adresse);
+            m_codePostal = (TextView) getView().findViewById(R.id.fragment_profil_patient_code_postal);
+            m_ville = (TextView) getView().findViewById(R.id.fragment_profil_patient_ville);
+            m_email = (TextView) getView().findViewById(R.id.fragment_profil_patient_email);
+            m_dateNaiss = (TextView) getView().findViewById(R.id.fragment_profil_medecin_date_naissance);
+            m_telephone = (TextView) getView().findViewById(R.id.fragment_profil_patient_telephone);
+
+        //Récupération des données en BD
+        db.collection("Patient")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("Récupération données", document.getId() + " => " + document.getData());
+                                //document.get()
+                            }
+                        } else {
+                            Log.d("Récupération données", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });*/
+
         //Demande de changement du titre
             if (mListener != null) {
                 mListener.onFragmentInteractionChangeTitle("Profil");
             }
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profil, container, false);
+        return inflater.inflate(R.layout.fragment_profil_patient, container, false);
     }
 
 /*    // TODO: Rename method, update argument and hook method into UI event

@@ -2,12 +2,9 @@ package fr.dutinfoprojet19.meetmydoc.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -24,7 +21,7 @@ import fr.dutinfoprojet19.meetmydoc.R;
 
 public class MenuPatientActivity extends AppCompatActivity
         implements
-        ProfilFragment.OnFragmentInteractionListener,
+        ProfilPatientFragment.OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
 
     //Déclaration
@@ -101,7 +98,7 @@ public class MenuPatientActivity extends AppCompatActivity
             } else if (id == R.id.activity_menu_patient_drawer_voir_rdv) {
 
             } else if (id == R.id.activity_menu_patient_drawer_voir_profil) {
-                fragment = new ProfilFragment();
+                fragment = new ProfilPatientFragment();
             } else if (id == R.id.activity_menu_patient_drawer_medecin_favoris) {
 
             } else if (id == R.id.activity_menu_patient_drawer_voir_dossier) {

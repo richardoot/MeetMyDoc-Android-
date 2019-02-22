@@ -1,11 +1,8 @@
 package fr.dutinfoprojet19.meetmydoc.controller;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,12 +12,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import fr.dutinfoprojet19.meetmydoc.R;
 
 public class MenuMedecinActivity extends AppCompatActivity
         implements
-        ProfilFragment.OnFragmentInteractionListener,
+        ProfilMedecinFragment.OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
+
+    //Déclaration
+        private FirebaseAuth m_Auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,7 @@ public class MenuMedecinActivity extends AppCompatActivity
         } else if (id == R.id.activity_menu_medecin_drawer_consulter_calendrier) {
 
         } else if (id == R.id.activity_menu_medecin_drawer_voir_profil) {
-            fragment = new ProfilFragment();
+            fragment = new ProfilMedecinFragment();
         } else if (id == R.id.activity_menu_medecin_drawer_voir_mes_patients) {
 
         } else if (id == R.id.activity_menu_medecin_drawer_aide) {
